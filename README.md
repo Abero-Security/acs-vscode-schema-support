@@ -1,71 +1,106 @@
-# acs-vscode-schema-support README
+# ACS VS Code Schema Support
 
-This is the README for your extension "acs-vscode-schema-support". After writing up a brief description, we recommend including the following sections.
+This VS Code extension provides YAML schema support for Agile Certificate Services (ACS) configuration files. 
+It enables IntelliSense, validation, and autocompletion for the supported configuration files.
+
+## Supported Configuration Files
+
+*Note:* all configuration files must end with exact lower case match and end with .yml.
+The structure of a configuration file is <name>.<type>.yml and the name must be the same
+string value as in the 'name' field in the YAML file.
+
+Name can have the characters 'a-z', 'A-Z', '0-9' and the '-','_' characters.
+
+* CertificateProfile: <name>.certprofile.yml
+
+Example: _test_profile.certprofile.yml_
+
+## Prerequisites
+
+Before using this extension, you must install the **YAML Extension by Red Hat**:
+
+1. Open VS Code
+2. Go to the Extensions view (Ctrl+Shift+X / Cmd+Shift+X)
+3. Search for "YAML" and install the extension by Red Hat
+4. Alternatively, install it from the command line: `code --install-extension redhat.vscode-yaml`
+
+![yaml-extension.png](yaml-extension.png)
+
+## Building the Extension
+
+### 1. Install vsce (VS Code Extension Manager)
+
+First, install the Visual Studio Code Extension Manager globally:
+
+```bash
+npm install -g @vscode/vsce
+```
+
+### 2. Install Dependencies
+
+Install the project dependencies:
+
+```bash
+npm install
+```
+
+### 3. Build the Extension Package
+
+Generate the `.vsix` package file:
+
+```bash
+vsce package
+```
+
+This will create a file named `acs-vscode-schema-support-0.0.1.vsix` in the root directory.
+
+## Installing the Extension in VS Code
+
+### Method 1: Using the Command Line
+
+```bash
+code --install-extension acs-vscode-schema-support-0.0.1.vsix
+```
+
+### Method 2: Using VS Code UI
+
+1. Open VS Code
+2. Go to the Extensions view (Ctrl+Shift+X / Cmd+Shift+X)
+3. Click the three dots menu (`...`) in the Extensions view
+4. Select "Install from VSIX..."
+5. Browse and select the `acs-vscode-schema-support-0.0.1.vsix` file
+6. Restart VS Code when prompted
 
 ## Features
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+- **Schema Validation**: Automatic validation of `*.certprofile.yml` files against X.509 certificate profile schemas
+- **IntelliSense**: Code completion and suggestions for certificate configuration properties
+- **Error Highlighting**: Real-time validation with error messages for invalid configurations
+- **Documentation**: Hover tooltips with property descriptions and valid values
 
-For example if there is an image subfolder under your extension project workspace:
+## Usage
 
-\!\[feature X\]\(images/feature-x.png\)
+Once installed, the extension automatically provides schema support for any file with the `.certprofile.yml` extension. The schema includes comprehensive validation for:
 
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
+- Certificate subject fields and constraints
+- X.509 certificate extensions (Basic Constraints, Key Usage, etc.)
+- Subject Alternative Names with various field types
+- Certificate policies and advanced extensions
+- Cryptographic parameters and validity periods
 
-## Requirements
+## Development
 
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
+### Build Commands
 
-## Extension Settings
+- `npm run compile` - Compile TypeScript to JavaScript
+- `npm run watch` - Compile in watch mode for development
+- `npm run lint` - Run ESLint on source files
+- `npm run test` - Run extension tests
+- `npm run vscode:prepublish` - Prepare for publishing
 
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
+### Project Structure
 
-For example:
+- `src/extension.ts` - Main extension entry point
+- `schemas/certificate-profile.schema.json` - JSON schema for certificate profiles
+- `package.json` - Extension manifest and configuration
 
-This extension contributes the following settings:
-
-* `myExtension.enable`: Enable/disable this extension.
-* `myExtension.thing`: Set to `blah` to do something.
-
-## Known Issues
-
-Calling out known issues can help limit users opening duplicate issues against your extension.
-
-## Release Notes
-
-Users appreciate release notes as you update your extension.
-
-### 1.0.0
-
-Initial release of ...
-
-### 1.0.1
-
-Fixed issue #.
-
-### 1.1.0
-
-Added features X, Y, and Z.
-
----
-
-## Following extension guidelines
-
-Ensure that you've read through the extensions guidelines and follow the best practices for creating your extension.
-
-* [Extension Guidelines](https://code.visualstudio.com/api/references/extension-guidelines)
-
-## Working with Markdown
-
-You can author your README using Visual Studio Code. Here are some useful editor keyboard shortcuts:
-
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux).
-* Toggle preview (`Shift+Cmd+V` on macOS or `Shift+Ctrl+V` on Windows and Linux).
-* Press `Ctrl+Space` (Windows, Linux, macOS) to see a list of Markdown snippets.
-
-## For more information
-
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
-
-**Enjoy!**
