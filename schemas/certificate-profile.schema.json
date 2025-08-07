@@ -1,0 +1,3815 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "http://localhost:8080/schemas/certificate-profile.schema.json",
+  "title": "CertificateProfile",
+  "description": "Complete X.509 certificate profile specification including subject fields, extensions, validity periods, and cryptographic parameters. Supports template inheritance and follows RFC 5280 standards for enterprise PKI environments.",
+  "type": [
+    "object"
+  ],
+  "properties": {
+    "authority_information_access": {
+      "title": "AdvancedExtensionConfigs.AuthorityInformationAccessConfig",
+      "type": [
+        "object"
+      ],
+      "properties": {
+        "access_descriptions": {
+          "type": [
+            "array"
+          ],
+          "items": {
+            "title": "AdvancedExtensionConfigs.AuthorityInformationAccessConfig.AccessDescriptionConfig",
+            "type": [
+              "object"
+            ],
+            "properties": {
+              "access_location": {
+                "title": "AdvancedExtensionConfigs.GeneralNameConfig",
+                "type": [
+                  "object"
+                ],
+                "properties": {
+                  "type": {
+                    "type": [
+                      "string"
+                    ],
+                    "minLength": 1,
+                    "pattern": "^(uri|dNSName|iPAddress|directoryName|ediPartyName|uniformResourceIdentifier|registeredID)$"
+                  },
+                  "value": {
+                    "type": [
+                      "string"
+                    ],
+                    "minLength": 1
+                  }
+                }
+              },
+              "access_method": {
+                "type": [
+                  "string"
+                ],
+                "minLength": 1,
+                "pattern": "^(ocsp|caIssuers|timeStamping)$"
+              }
+            }
+          }
+        },
+        "critical": {
+          "type": [
+            "boolean"
+          ]
+        },
+        "enabled": {
+          "type": [
+            "boolean"
+          ]
+        }
+      }
+    },
+    "authority_key_identifier": {
+      "title": "ExtensionConfigs.ExtensionConfig",
+      "type": [
+        "object"
+      ],
+      "properties": {
+        "critical": {
+          "type": [
+            "boolean"
+          ]
+        },
+        "enabled": {
+          "type": [
+            "boolean"
+          ]
+        }
+      }
+    },
+    "basic_constraints": {
+      "title": "ExtensionConfigs.BasicConstraintsConfig",
+      "type": [
+        "object"
+      ],
+      "properties": {
+        "ca": {
+          "type": [
+            "boolean"
+          ]
+        },
+        "critical": {
+          "type": [
+            "boolean"
+          ]
+        },
+        "enabled": {
+          "type": [
+            "boolean"
+          ]
+        },
+        "path_length": {
+          "type": [
+            "integer"
+          ],
+          "minimum": 0
+        }
+      }
+    },
+    "ca": {
+      "type": [
+        "string"
+      ],
+      "maxLength": 256
+    },
+    "certificate_policies": {
+      "title": "ExtensionConfigs.CertificatePoliciesConfig",
+      "type": [
+        "object"
+      ],
+      "properties": {
+        "critical": {
+          "type": [
+            "boolean"
+          ]
+        },
+        "enabled": {
+          "type": [
+            "boolean"
+          ]
+        },
+        "policies": {
+          "type": [
+            "array"
+          ],
+          "items": {
+            "title": "ExtensionConfigs.CertificatePoliciesConfig.PolicyConfig",
+            "type": [
+              "object"
+            ],
+            "properties": {
+              "policy_identifier": {
+                "type": [
+                  "string"
+                ],
+                "minLength": 1,
+                "pattern": "^\\d+(\\.\\d+)*$"
+              },
+              "policy_qualifiers": {
+                "type": [
+                  "array"
+                ],
+                "items": {
+                  "title": "ExtensionConfigs.CertificatePoliciesConfig.PolicyQualifierConfig",
+                  "type": [
+                    "object"
+                  ],
+                  "properties": {
+                    "notice_text": {
+                      "type": [
+                        "string"
+                      ]
+                    },
+                    "qualifier": {
+                      "type": [
+                        "string"
+                      ]
+                    },
+                    "qualifier_type": {
+                      "type": [
+                        "string"
+                      ],
+                      "pattern": "^(CPS|UserNotice)$"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "crl_distribution_points": {
+      "title": "AdvancedExtensionConfigs.CrlDistributionPointsConfig",
+      "type": [
+        "object"
+      ],
+      "properties": {
+        "critical": {
+          "type": [
+            "boolean"
+          ]
+        },
+        "distribution_points": {
+          "type": [
+            "array"
+          ],
+          "items": {
+            "title": "AdvancedExtensionConfigs.CrlDistributionPointsConfig.DistributionPointConfig",
+            "type": [
+              "object"
+            ],
+            "properties": {
+              "full_name": {
+                "type": [
+                  "array"
+                ],
+                "items": {
+                  "title": "AdvancedExtensionConfigs.GeneralNameConfig",
+                  "type": [
+                    "object"
+                  ],
+                  "properties": {
+                    "type": {
+                      "type": [
+                        "string"
+                      ],
+                      "minLength": 1,
+                      "pattern": "^(uri|dNSName|iPAddress|directoryName|ediPartyName|uniformResourceIdentifier|registeredID)$"
+                    },
+                    "value": {
+                      "type": [
+                        "string"
+                      ],
+                      "minLength": 1
+                    }
+                  }
+                }
+              },
+              "reasons": {
+                "type": [
+                  "array"
+                ],
+                "items": {
+                  "type": [
+                    "string"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "enabled": {
+          "type": [
+            "boolean"
+          ]
+        }
+      }
+    },
+    "crypto_policy": {
+      "type": [
+        "string"
+      ],
+      "maxLength": 256
+    },
+    "custom_extension": {
+      "type": [
+        "array"
+      ],
+      "items": {
+        "title": "AdvancedExtensionConfigs.CustomExtensionConfig",
+        "type": [
+          "object"
+        ],
+        "properties": {
+          "attribute": {
+            "type": [
+              "string"
+            ]
+          },
+          "critical": {
+            "type": [
+              "boolean"
+            ]
+          },
+          "data": {
+            "type": [
+              "string"
+            ]
+          },
+          "display_name": {
+            "type": [
+              "string"
+            ],
+            "maxLength": 256
+          },
+          "encoding": {
+            "type": [
+              "string"
+            ],
+            "pattern": "^(DERBITSTRING|DERINTEGER|DEROCTETSTRING|DERBOOLEAN|DERPRINTABLESTRING|DERUTF8STRING|DERIA5STRING|DERNULL|DEROBJECT|DEROBJECTIDENTIFIER|RAW)$"
+          },
+          "oid": {
+            "type": [
+              "string"
+            ],
+            "minLength": 1,
+            "pattern": "^\\d+(\\.\\d+)*$"
+          },
+          "type": {
+            "type": [
+              "string"
+            ],
+            "minLength": 1,
+            "pattern": "^(fixed|attribute)$"
+          }
+        },
+        "required": [
+          "encoding"
+        ]
+      }
+    },
+    "display_name": {
+      "type": [
+        "string"
+      ]
+    },
+    "extended_key_usage": {
+      "title": "ExtensionConfigs.ExtendedKeyUsageConfig",
+      "type": [
+        "object"
+      ],
+      "properties": {
+        "critical": {
+          "type": [
+            "boolean"
+          ]
+        },
+        "enabled": {
+          "type": [
+            "boolean"
+          ]
+        },
+        "purposes": {
+          "type": [
+            "array"
+          ],
+          "items": {
+            "type": [
+              "string"
+            ]
+          }
+        }
+      }
+    },
+    "freshest_crl": {
+      "title": "AdvancedExtensionConfigs.FreshestCrlConfig",
+      "type": [
+        "object"
+      ],
+      "properties": {
+        "critical": {
+          "type": [
+            "boolean"
+          ]
+        },
+        "distribution_points": {
+          "type": [
+            "array"
+          ],
+          "items": {
+            "title": "AdvancedExtensionConfigs.CrlDistributionPointsConfig.DistributionPointConfig",
+            "type": [
+              "object"
+            ],
+            "properties": {
+              "full_name": {
+                "type": [
+                  "array"
+                ],
+                "items": {
+                  "title": "AdvancedExtensionConfigs.GeneralNameConfig",
+                  "type": [
+                    "object"
+                  ],
+                  "properties": {
+                    "type": {
+                      "type": [
+                        "string"
+                      ],
+                      "minLength": 1,
+                      "pattern": "^(uri|dNSName|iPAddress|directoryName|ediPartyName|uniformResourceIdentifier|registeredID)$"
+                    },
+                    "value": {
+                      "type": [
+                        "string"
+                      ],
+                      "minLength": 1
+                    }
+                  }
+                }
+              },
+              "reasons": {
+                "type": [
+                  "array"
+                ],
+                "items": {
+                  "type": [
+                    "string"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "enabled": {
+          "type": [
+            "boolean"
+          ]
+        }
+      }
+    },
+    "inhibit_any_policy": {
+      "title": "AdvancedExtensionConfigs.InhibitAnyPolicyConfig",
+      "type": [
+        "object"
+      ],
+      "properties": {
+        "critical": {
+          "type": [
+            "boolean"
+          ]
+        },
+        "enabled": {
+          "type": [
+            "boolean"
+          ]
+        },
+        "skip_certs": {
+          "type": [
+            "integer"
+          ],
+          "minimum": 0
+        }
+      }
+    },
+    "issuer_alternative_name": {
+      "title": "ExtensionConfigs.ExtensionConfig",
+      "type": [
+        "object"
+      ],
+      "properties": {
+        "critical": {
+          "type": [
+            "boolean"
+          ]
+        },
+        "enabled": {
+          "type": [
+            "boolean"
+          ]
+        }
+      }
+    },
+    "key_usage": {
+      "title": "ExtensionConfigs.KeyUsageConfig",
+      "type": [
+        "object"
+      ],
+      "properties": {
+        "critical": {
+          "type": [
+            "boolean"
+          ]
+        },
+        "enabled": {
+          "type": [
+            "boolean"
+          ]
+        },
+        "purposes": {
+          "type": [
+            "array"
+          ],
+          "items": {
+            "type": [
+              "string"
+            ]
+          }
+        }
+      }
+    },
+    "name": {
+      "type": [
+        "string"
+      ],
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^[a-zA-Z0-9_-]+$"
+    },
+    "name_constraints": {
+      "title": "AdvancedExtensionConfigs.NameConstraintsConfig",
+      "type": [
+        "object"
+      ],
+      "properties": {
+        "critical": {
+          "type": [
+            "boolean"
+          ]
+        },
+        "enabled": {
+          "type": [
+            "boolean"
+          ]
+        },
+        "excluded_subtrees": {
+          "type": [
+            "array"
+          ],
+          "items": {
+            "title": "AdvancedExtensionConfigs.NameConstraintsConfig.SubtreeConfig",
+            "type": [
+              "object"
+            ],
+            "properties": {
+              "type": {
+                "type": [
+                  "string"
+                ],
+                "minLength": 1,
+                "pattern": "^(dNSName|iPAddress|directoryName|ediPartyName|uniformResourceIdentifier|registeredID)$"
+              },
+              "value": {
+                "type": [
+                  "string"
+                ],
+                "minLength": 1
+              }
+            }
+          }
+        },
+        "permitted_subtrees": {
+          "type": [
+            "array"
+          ],
+          "items": {
+            "title": "AdvancedExtensionConfigs.NameConstraintsConfig.SubtreeConfig",
+            "type": [
+              "object"
+            ],
+            "properties": {
+              "type": {
+                "type": [
+                  "string"
+                ],
+                "minLength": 1,
+                "pattern": "^(dNSName|iPAddress|directoryName|ediPartyName|uniformResourceIdentifier|registeredID)$"
+              },
+              "value": {
+                "type": [
+                  "string"
+                ],
+                "minLength": 1
+              }
+            }
+          }
+        }
+      }
+    },
+    "policy_constraints": {
+      "title": "AdvancedExtensionConfigs.PolicyConstraintsConfig",
+      "type": [
+        "object"
+      ],
+      "properties": {
+        "critical": {
+          "type": [
+            "boolean"
+          ]
+        },
+        "enabled": {
+          "type": [
+            "boolean"
+          ]
+        },
+        "inhibit_policy_mapping": {
+          "type": [
+            "integer"
+          ],
+          "minimum": 0
+        },
+        "require_explicit_policy": {
+          "type": [
+            "integer"
+          ],
+          "minimum": 0
+        }
+      }
+    },
+    "policy_mappings": {
+      "title": "ExtensionConfigs.PolicyMappingsConfig",
+      "type": [
+        "object"
+      ],
+      "properties": {
+        "critical": {
+          "type": [
+            "boolean"
+          ]
+        },
+        "enabled": {
+          "type": [
+            "boolean"
+          ]
+        },
+        "mappings": {
+          "type": [
+            "array"
+          ],
+          "items": {
+            "title": "ExtensionConfigs.PolicyMappingsConfig.PolicyMappingConfig",
+            "type": [
+              "object"
+            ],
+            "properties": {
+              "issuer_domain_policy": {
+                "type": [
+                  "string"
+                ],
+                "pattern": "^\\d+(\\.\\d+)*$"
+              },
+              "subject_domain_policy": {
+                "type": [
+                  "string"
+                ],
+                "pattern": "^\\d+(\\.\\d+)*$"
+              }
+            }
+          }
+        }
+      }
+    },
+    "resource_mapping": {
+      "type": [
+        "string"
+      ],
+      "maxLength": 256
+    },
+    "serial_number": {
+      "title": "ExtensionConfigs.SerialNumberConfig",
+      "type": [
+        "object"
+      ],
+      "properties": {
+        "length": {
+          "type": [
+            "integer"
+          ],
+          "maximum": 20,
+          "minimum": 1
+        }
+      }
+    },
+    "signature_algorithm": {
+      "type": [
+        "string"
+      ],
+      "pattern": "(?i)^(MD2withRSA|MD4withRSA|MD5withRSA|SHA1withRSA|RS1|RIPEMD160withRSA|RIPEMD128withRSA|RIPEMD256withRSA|SHA224withRSA|SHA3-224withRSA|SHA3-256withRSA|SHA3-384withRSA|SHA3-512withRSA|SHA256withRSA|RS256|SHA384withRSA|RS384|SHA512withRSA|RS512|SHA256withRSAandMGF1|PS256|SHA384withRSAandMGF1|PS384|SHA512withRSAandMGF1|PS512|SHA1withDSA|SHA224withDSA|SHA3-224withDSA|SHA3-256withDSA|SHA3-384withDSA|SHA3-512withDSA|SHA256withDSA|SHA384withDSA|SHA512withDSA|SHA1withECDSA|SHA224withECDSA|SHA3-224withECDSA|SHA3-256withECDSA|SHA3-384withECDSA|SHA3-512withECDSA|SHA256withECDSA|ES256|SHA384withECDSA|ES384|SHA512withECDSA|ES512|Ed25519|Ed448|LMS|HSS|GOST3411withGOST3410|GOST3411withECGOST3410|SHA1withRSA/ISO9796-2|MD5andSHA1withRSA|RIPEMD160withECDSA|RIPEMD256withECDSA|WHIRLPOOLwithRSA|WHIRLPOOLwithECDSA)$"
+    },
+    "subject": {
+      "type": [
+        "object"
+      ],
+      "additionalProperties": {
+        "title": "SubjectFieldConfig",
+        "description": "Subject Field Validation JsonClassDescription",
+        "type": [
+          "object"
+        ],
+        "properties": {
+          "constraints": {
+            "title": "SubjectFieldConfig.ConstraintConfig",
+            "type": [
+              "object"
+            ],
+            "properties": {
+              "domain_names": {
+                "type": [
+                  "array"
+                ],
+                "items": {
+                  "title": "DomainNameConstraint",
+                  "type": [
+                    "object"
+                  ],
+                  "properties": {
+                    "allow_wildchars": {
+                      "type": [
+                        "boolean"
+                      ]
+                    },
+                    "domain_name": {
+                      "type": [
+                        "string"
+                      ],
+                      "minLength": 1
+                    }
+                  }
+                }
+              },
+              "email_domains": {
+                "type": [
+                  "array"
+                ],
+                "items": {
+                  "type": [
+                    "string"
+                  ]
+                }
+              },
+              "list_values": {
+                "type": [
+                  "array"
+                ],
+                "items": {
+                  "type": [
+                    "string"
+                  ]
+                }
+              },
+              "max_length": {
+                "type": [
+                  "integer"
+                ]
+              },
+              "max_value": {
+                "type": [
+                  "integer"
+                ]
+              },
+              "min_length": {
+                "type": [
+                  "integer"
+                ]
+              },
+              "min_value": {
+                "type": [
+                  "integer"
+                ]
+              },
+              "only_ipv4": {
+                "type": [
+                  "boolean"
+                ]
+              },
+              "only_ipv6": {
+                "type": [
+                  "boolean"
+                ]
+              },
+              "pattern": {
+                "type": [
+                  "string"
+                ]
+              },
+              "type": {
+                "type": [
+                  "string"
+                ],
+                "pattern": "^(integer|text|email|url|domain-name|ip-address|in-list|regex)$"
+              }
+            }
+          },
+          "example": {
+            "type": [
+              "string"
+            ],
+            "maxLength": 512
+          },
+          "fieldName": {
+            "type": [
+              "string"
+            ]
+          },
+          "max": {
+            "type": [
+              "integer"
+            ],
+            "minimum": 1
+          },
+          "min": {
+            "type": [
+              "integer"
+            ],
+            "minimum": 1
+          },
+          "required": {
+            "type": [
+              "boolean"
+            ]
+          },
+          "value": {
+            "type": [
+              "string"
+            ],
+            "maxLength": 512
+          }
+        }
+      }
+    },
+    "subject_alternative_name": {
+      "title": "SubjectAlternativeNameConfig",
+      "description": "Configuration for Subject Alternative Name extension with individual fields for each SAN type.\n \n <p>This configuration supports all standard X.509 Subject Alternative Name types including:</p>\n <ul>\n <li>Core SAN types: DNS names, email addresses, IP addresses, URIs, etc.</li>\n <li>Microsoft-specific types: UPN, GUID</li>\n <li>Kerberos and security types: Kerberos principals, permanent identifiers</li>\n <li>Smart card and federal types: FASC-N</li>\n <li>Communication types: XMPP addresses, service names</li>\n </ul>",
+      "type": [
+        "object"
+      ],
+      "properties": {
+        "critical": {
+          "type": [
+            "boolean"
+          ]
+        },
+        "directory_name": {
+          "title": "SubjectFieldConfig",
+          "description": "Subject Field Validation JsonClassDescription",
+          "type": [
+            "object"
+          ],
+          "properties": {
+            "constraints": {
+              "title": "SubjectFieldConfig.ConstraintConfig",
+              "type": [
+                "object"
+              ],
+              "properties": {
+                "domain_names": {
+                  "type": [
+                    "array"
+                  ],
+                  "items": {
+                    "title": "DomainNameConstraint",
+                    "type": [
+                      "object"
+                    ],
+                    "properties": {
+                      "allow_wildchars": {
+                        "type": [
+                          "boolean"
+                        ]
+                      },
+                      "domain_name": {
+                        "type": [
+                          "string"
+                        ],
+                        "minLength": 1
+                      }
+                    }
+                  }
+                },
+                "email_domains": {
+                  "type": [
+                    "array"
+                  ],
+                  "items": {
+                    "type": [
+                      "string"
+                    ]
+                  }
+                },
+                "list_values": {
+                  "type": [
+                    "array"
+                  ],
+                  "items": {
+                    "type": [
+                      "string"
+                    ]
+                  }
+                },
+                "max_length": {
+                  "type": [
+                    "integer"
+                  ]
+                },
+                "max_value": {
+                  "type": [
+                    "integer"
+                  ]
+                },
+                "min_length": {
+                  "type": [
+                    "integer"
+                  ]
+                },
+                "min_value": {
+                  "type": [
+                    "integer"
+                  ]
+                },
+                "only_ipv4": {
+                  "type": [
+                    "boolean"
+                  ]
+                },
+                "only_ipv6": {
+                  "type": [
+                    "boolean"
+                  ]
+                },
+                "pattern": {
+                  "type": [
+                    "string"
+                  ]
+                },
+                "type": {
+                  "type": [
+                    "string"
+                  ],
+                  "pattern": "^(integer|text|email|url|domain-name|ip-address|in-list|regex)$"
+                }
+              }
+            },
+            "example": {
+              "type": [
+                "string"
+              ],
+              "maxLength": 512
+            },
+            "fieldName": {
+              "type": [
+                "string"
+              ]
+            },
+            "max": {
+              "type": [
+                "integer"
+              ],
+              "minimum": 1
+            },
+            "min": {
+              "type": [
+                "integer"
+              ],
+              "minimum": 1
+            },
+            "required": {
+              "type": [
+                "boolean"
+              ]
+            },
+            "value": {
+              "type": [
+                "string"
+              ],
+              "maxLength": 512
+            }
+          }
+        },
+        "dns_name": {
+          "title": "SubjectFieldConfig",
+          "description": "Subject Field Validation JsonClassDescription",
+          "type": [
+            "object"
+          ],
+          "properties": {
+            "constraints": {
+              "title": "SubjectFieldConfig.ConstraintConfig",
+              "type": [
+                "object"
+              ],
+              "properties": {
+                "domain_names": {
+                  "type": [
+                    "array"
+                  ],
+                  "items": {
+                    "title": "DomainNameConstraint",
+                    "type": [
+                      "object"
+                    ],
+                    "properties": {
+                      "allow_wildchars": {
+                        "type": [
+                          "boolean"
+                        ]
+                      },
+                      "domain_name": {
+                        "type": [
+                          "string"
+                        ],
+                        "minLength": 1
+                      }
+                    }
+                  }
+                },
+                "email_domains": {
+                  "type": [
+                    "array"
+                  ],
+                  "items": {
+                    "type": [
+                      "string"
+                    ]
+                  }
+                },
+                "list_values": {
+                  "type": [
+                    "array"
+                  ],
+                  "items": {
+                    "type": [
+                      "string"
+                    ]
+                  }
+                },
+                "max_length": {
+                  "type": [
+                    "integer"
+                  ]
+                },
+                "max_value": {
+                  "type": [
+                    "integer"
+                  ]
+                },
+                "min_length": {
+                  "type": [
+                    "integer"
+                  ]
+                },
+                "min_value": {
+                  "type": [
+                    "integer"
+                  ]
+                },
+                "only_ipv4": {
+                  "type": [
+                    "boolean"
+                  ]
+                },
+                "only_ipv6": {
+                  "type": [
+                    "boolean"
+                  ]
+                },
+                "pattern": {
+                  "type": [
+                    "string"
+                  ]
+                },
+                "type": {
+                  "type": [
+                    "string"
+                  ],
+                  "pattern": "^(integer|text|email|url|domain-name|ip-address|in-list|regex)$"
+                }
+              }
+            },
+            "example": {
+              "type": [
+                "string"
+              ],
+              "maxLength": 512
+            },
+            "fieldName": {
+              "type": [
+                "string"
+              ]
+            },
+            "max": {
+              "type": [
+                "integer"
+              ],
+              "minimum": 1
+            },
+            "min": {
+              "type": [
+                "integer"
+              ],
+              "minimum": 1
+            },
+            "required": {
+              "type": [
+                "boolean"
+              ]
+            },
+            "value": {
+              "type": [
+                "string"
+              ],
+              "maxLength": 512
+            }
+          }
+        },
+        "edi_party_name": {
+          "title": "SubjectFieldConfig",
+          "description": "Subject Field Validation JsonClassDescription",
+          "type": [
+            "object"
+          ],
+          "properties": {
+            "constraints": {
+              "title": "SubjectFieldConfig.ConstraintConfig",
+              "type": [
+                "object"
+              ],
+              "properties": {
+                "domain_names": {
+                  "type": [
+                    "array"
+                  ],
+                  "items": {
+                    "title": "DomainNameConstraint",
+                    "type": [
+                      "object"
+                    ],
+                    "properties": {
+                      "allow_wildchars": {
+                        "type": [
+                          "boolean"
+                        ]
+                      },
+                      "domain_name": {
+                        "type": [
+                          "string"
+                        ],
+                        "minLength": 1
+                      }
+                    }
+                  }
+                },
+                "email_domains": {
+                  "type": [
+                    "array"
+                  ],
+                  "items": {
+                    "type": [
+                      "string"
+                    ]
+                  }
+                },
+                "list_values": {
+                  "type": [
+                    "array"
+                  ],
+                  "items": {
+                    "type": [
+                      "string"
+                    ]
+                  }
+                },
+                "max_length": {
+                  "type": [
+                    "integer"
+                  ]
+                },
+                "max_value": {
+                  "type": [
+                    "integer"
+                  ]
+                },
+                "min_length": {
+                  "type": [
+                    "integer"
+                  ]
+                },
+                "min_value": {
+                  "type": [
+                    "integer"
+                  ]
+                },
+                "only_ipv4": {
+                  "type": [
+                    "boolean"
+                  ]
+                },
+                "only_ipv6": {
+                  "type": [
+                    "boolean"
+                  ]
+                },
+                "pattern": {
+                  "type": [
+                    "string"
+                  ]
+                },
+                "type": {
+                  "type": [
+                    "string"
+                  ],
+                  "pattern": "^(integer|text|email|url|domain-name|ip-address|in-list|regex)$"
+                }
+              }
+            },
+            "example": {
+              "type": [
+                "string"
+              ],
+              "maxLength": 512
+            },
+            "fieldName": {
+              "type": [
+                "string"
+              ]
+            },
+            "max": {
+              "type": [
+                "integer"
+              ],
+              "minimum": 1
+            },
+            "min": {
+              "type": [
+                "integer"
+              ],
+              "minimum": 1
+            },
+            "required": {
+              "type": [
+                "boolean"
+              ]
+            },
+            "value": {
+              "type": [
+                "string"
+              ],
+              "maxLength": 512
+            }
+          }
+        },
+        "email_address": {
+          "title": "SubjectFieldConfig",
+          "description": "Subject Field Validation JsonClassDescription",
+          "type": [
+            "object"
+          ],
+          "properties": {
+            "constraints": {
+              "title": "SubjectFieldConfig.ConstraintConfig",
+              "type": [
+                "object"
+              ],
+              "properties": {
+                "domain_names": {
+                  "type": [
+                    "array"
+                  ],
+                  "items": {
+                    "title": "DomainNameConstraint",
+                    "type": [
+                      "object"
+                    ],
+                    "properties": {
+                      "allow_wildchars": {
+                        "type": [
+                          "boolean"
+                        ]
+                      },
+                      "domain_name": {
+                        "type": [
+                          "string"
+                        ],
+                        "minLength": 1
+                      }
+                    }
+                  }
+                },
+                "email_domains": {
+                  "type": [
+                    "array"
+                  ],
+                  "items": {
+                    "type": [
+                      "string"
+                    ]
+                  }
+                },
+                "list_values": {
+                  "type": [
+                    "array"
+                  ],
+                  "items": {
+                    "type": [
+                      "string"
+                    ]
+                  }
+                },
+                "max_length": {
+                  "type": [
+                    "integer"
+                  ]
+                },
+                "max_value": {
+                  "type": [
+                    "integer"
+                  ]
+                },
+                "min_length": {
+                  "type": [
+                    "integer"
+                  ]
+                },
+                "min_value": {
+                  "type": [
+                    "integer"
+                  ]
+                },
+                "only_ipv4": {
+                  "type": [
+                    "boolean"
+                  ]
+                },
+                "only_ipv6": {
+                  "type": [
+                    "boolean"
+                  ]
+                },
+                "pattern": {
+                  "type": [
+                    "string"
+                  ]
+                },
+                "type": {
+                  "type": [
+                    "string"
+                  ],
+                  "pattern": "^(integer|text|email|url|domain-name|ip-address|in-list|regex)$"
+                }
+              }
+            },
+            "example": {
+              "type": [
+                "string"
+              ],
+              "maxLength": 512
+            },
+            "fieldName": {
+              "type": [
+                "string"
+              ]
+            },
+            "max": {
+              "type": [
+                "integer"
+              ],
+              "minimum": 1
+            },
+            "min": {
+              "type": [
+                "integer"
+              ],
+              "minimum": 1
+            },
+            "required": {
+              "type": [
+                "boolean"
+              ]
+            },
+            "value": {
+              "type": [
+                "string"
+              ],
+              "maxLength": 512
+            }
+          }
+        },
+        "enabled": {
+          "type": [
+            "boolean"
+          ]
+        },
+        "fasc_n": {
+          "title": "SubjectFieldConfig",
+          "description": "Subject Field Validation JsonClassDescription",
+          "type": [
+            "object"
+          ],
+          "properties": {
+            "constraints": {
+              "title": "SubjectFieldConfig.ConstraintConfig",
+              "type": [
+                "object"
+              ],
+              "properties": {
+                "domain_names": {
+                  "type": [
+                    "array"
+                  ],
+                  "items": {
+                    "title": "DomainNameConstraint",
+                    "type": [
+                      "object"
+                    ],
+                    "properties": {
+                      "allow_wildchars": {
+                        "type": [
+                          "boolean"
+                        ]
+                      },
+                      "domain_name": {
+                        "type": [
+                          "string"
+                        ],
+                        "minLength": 1
+                      }
+                    }
+                  }
+                },
+                "email_domains": {
+                  "type": [
+                    "array"
+                  ],
+                  "items": {
+                    "type": [
+                      "string"
+                    ]
+                  }
+                },
+                "list_values": {
+                  "type": [
+                    "array"
+                  ],
+                  "items": {
+                    "type": [
+                      "string"
+                    ]
+                  }
+                },
+                "max_length": {
+                  "type": [
+                    "integer"
+                  ]
+                },
+                "max_value": {
+                  "type": [
+                    "integer"
+                  ]
+                },
+                "min_length": {
+                  "type": [
+                    "integer"
+                  ]
+                },
+                "min_value": {
+                  "type": [
+                    "integer"
+                  ]
+                },
+                "only_ipv4": {
+                  "type": [
+                    "boolean"
+                  ]
+                },
+                "only_ipv6": {
+                  "type": [
+                    "boolean"
+                  ]
+                },
+                "pattern": {
+                  "type": [
+                    "string"
+                  ]
+                },
+                "type": {
+                  "type": [
+                    "string"
+                  ],
+                  "pattern": "^(integer|text|email|url|domain-name|ip-address|in-list|regex)$"
+                }
+              }
+            },
+            "example": {
+              "type": [
+                "string"
+              ],
+              "maxLength": 512
+            },
+            "fieldName": {
+              "type": [
+                "string"
+              ]
+            },
+            "max": {
+              "type": [
+                "integer"
+              ],
+              "minimum": 1
+            },
+            "min": {
+              "type": [
+                "integer"
+              ],
+              "minimum": 1
+            },
+            "required": {
+              "type": [
+                "boolean"
+              ]
+            },
+            "value": {
+              "type": [
+                "string"
+              ],
+              "maxLength": 512
+            }
+          }
+        },
+        "guid": {
+          "title": "SubjectFieldConfig",
+          "description": "Subject Field Validation JsonClassDescription",
+          "type": [
+            "object"
+          ],
+          "properties": {
+            "constraints": {
+              "title": "SubjectFieldConfig.ConstraintConfig",
+              "type": [
+                "object"
+              ],
+              "properties": {
+                "domain_names": {
+                  "type": [
+                    "array"
+                  ],
+                  "items": {
+                    "title": "DomainNameConstraint",
+                    "type": [
+                      "object"
+                    ],
+                    "properties": {
+                      "allow_wildchars": {
+                        "type": [
+                          "boolean"
+                        ]
+                      },
+                      "domain_name": {
+                        "type": [
+                          "string"
+                        ],
+                        "minLength": 1
+                      }
+                    }
+                  }
+                },
+                "email_domains": {
+                  "type": [
+                    "array"
+                  ],
+                  "items": {
+                    "type": [
+                      "string"
+                    ]
+                  }
+                },
+                "list_values": {
+                  "type": [
+                    "array"
+                  ],
+                  "items": {
+                    "type": [
+                      "string"
+                    ]
+                  }
+                },
+                "max_length": {
+                  "type": [
+                    "integer"
+                  ]
+                },
+                "max_value": {
+                  "type": [
+                    "integer"
+                  ]
+                },
+                "min_length": {
+                  "type": [
+                    "integer"
+                  ]
+                },
+                "min_value": {
+                  "type": [
+                    "integer"
+                  ]
+                },
+                "only_ipv4": {
+                  "type": [
+                    "boolean"
+                  ]
+                },
+                "only_ipv6": {
+                  "type": [
+                    "boolean"
+                  ]
+                },
+                "pattern": {
+                  "type": [
+                    "string"
+                  ]
+                },
+                "type": {
+                  "type": [
+                    "string"
+                  ],
+                  "pattern": "^(integer|text|email|url|domain-name|ip-address|in-list|regex)$"
+                }
+              }
+            },
+            "example": {
+              "type": [
+                "string"
+              ],
+              "maxLength": 512
+            },
+            "fieldName": {
+              "type": [
+                "string"
+              ]
+            },
+            "max": {
+              "type": [
+                "integer"
+              ],
+              "minimum": 1
+            },
+            "min": {
+              "type": [
+                "integer"
+              ],
+              "minimum": 1
+            },
+            "required": {
+              "type": [
+                "boolean"
+              ]
+            },
+            "value": {
+              "type": [
+                "string"
+              ],
+              "maxLength": 512
+            }
+          }
+        },
+        "ip_address": {
+          "title": "SubjectFieldConfig",
+          "description": "Subject Field Validation JsonClassDescription",
+          "type": [
+            "object"
+          ],
+          "properties": {
+            "constraints": {
+              "title": "SubjectFieldConfig.ConstraintConfig",
+              "type": [
+                "object"
+              ],
+              "properties": {
+                "domain_names": {
+                  "type": [
+                    "array"
+                  ],
+                  "items": {
+                    "title": "DomainNameConstraint",
+                    "type": [
+                      "object"
+                    ],
+                    "properties": {
+                      "allow_wildchars": {
+                        "type": [
+                          "boolean"
+                        ]
+                      },
+                      "domain_name": {
+                        "type": [
+                          "string"
+                        ],
+                        "minLength": 1
+                      }
+                    }
+                  }
+                },
+                "email_domains": {
+                  "type": [
+                    "array"
+                  ],
+                  "items": {
+                    "type": [
+                      "string"
+                    ]
+                  }
+                },
+                "list_values": {
+                  "type": [
+                    "array"
+                  ],
+                  "items": {
+                    "type": [
+                      "string"
+                    ]
+                  }
+                },
+                "max_length": {
+                  "type": [
+                    "integer"
+                  ]
+                },
+                "max_value": {
+                  "type": [
+                    "integer"
+                  ]
+                },
+                "min_length": {
+                  "type": [
+                    "integer"
+                  ]
+                },
+                "min_value": {
+                  "type": [
+                    "integer"
+                  ]
+                },
+                "only_ipv4": {
+                  "type": [
+                    "boolean"
+                  ]
+                },
+                "only_ipv6": {
+                  "type": [
+                    "boolean"
+                  ]
+                },
+                "pattern": {
+                  "type": [
+                    "string"
+                  ]
+                },
+                "type": {
+                  "type": [
+                    "string"
+                  ],
+                  "pattern": "^(integer|text|email|url|domain-name|ip-address|in-list|regex)$"
+                }
+              }
+            },
+            "example": {
+              "type": [
+                "string"
+              ],
+              "maxLength": 512
+            },
+            "fieldName": {
+              "type": [
+                "string"
+              ]
+            },
+            "max": {
+              "type": [
+                "integer"
+              ],
+              "minimum": 1
+            },
+            "min": {
+              "type": [
+                "integer"
+              ],
+              "minimum": 1
+            },
+            "required": {
+              "type": [
+                "boolean"
+              ]
+            },
+            "value": {
+              "type": [
+                "string"
+              ],
+              "maxLength": 512
+            }
+          }
+        },
+        "krb5_principal": {
+          "title": "SubjectFieldConfig",
+          "description": "Subject Field Validation JsonClassDescription",
+          "type": [
+            "object"
+          ],
+          "properties": {
+            "constraints": {
+              "title": "SubjectFieldConfig.ConstraintConfig",
+              "type": [
+                "object"
+              ],
+              "properties": {
+                "domain_names": {
+                  "type": [
+                    "array"
+                  ],
+                  "items": {
+                    "title": "DomainNameConstraint",
+                    "type": [
+                      "object"
+                    ],
+                    "properties": {
+                      "allow_wildchars": {
+                        "type": [
+                          "boolean"
+                        ]
+                      },
+                      "domain_name": {
+                        "type": [
+                          "string"
+                        ],
+                        "minLength": 1
+                      }
+                    }
+                  }
+                },
+                "email_domains": {
+                  "type": [
+                    "array"
+                  ],
+                  "items": {
+                    "type": [
+                      "string"
+                    ]
+                  }
+                },
+                "list_values": {
+                  "type": [
+                    "array"
+                  ],
+                  "items": {
+                    "type": [
+                      "string"
+                    ]
+                  }
+                },
+                "max_length": {
+                  "type": [
+                    "integer"
+                  ]
+                },
+                "max_value": {
+                  "type": [
+                    "integer"
+                  ]
+                },
+                "min_length": {
+                  "type": [
+                    "integer"
+                  ]
+                },
+                "min_value": {
+                  "type": [
+                    "integer"
+                  ]
+                },
+                "only_ipv4": {
+                  "type": [
+                    "boolean"
+                  ]
+                },
+                "only_ipv6": {
+                  "type": [
+                    "boolean"
+                  ]
+                },
+                "pattern": {
+                  "type": [
+                    "string"
+                  ]
+                },
+                "type": {
+                  "type": [
+                    "string"
+                  ],
+                  "pattern": "^(integer|text|email|url|domain-name|ip-address|in-list|regex)$"
+                }
+              }
+            },
+            "example": {
+              "type": [
+                "string"
+              ],
+              "maxLength": 512
+            },
+            "fieldName": {
+              "type": [
+                "string"
+              ]
+            },
+            "max": {
+              "type": [
+                "integer"
+              ],
+              "minimum": 1
+            },
+            "min": {
+              "type": [
+                "integer"
+              ],
+              "minimum": 1
+            },
+            "required": {
+              "type": [
+                "boolean"
+              ]
+            },
+            "value": {
+              "type": [
+                "string"
+              ],
+              "maxLength": 512
+            }
+          }
+        },
+        "permanent_identifier": {
+          "title": "SubjectFieldConfig",
+          "description": "Subject Field Validation JsonClassDescription",
+          "type": [
+            "object"
+          ],
+          "properties": {
+            "constraints": {
+              "title": "SubjectFieldConfig.ConstraintConfig",
+              "type": [
+                "object"
+              ],
+              "properties": {
+                "domain_names": {
+                  "type": [
+                    "array"
+                  ],
+                  "items": {
+                    "title": "DomainNameConstraint",
+                    "type": [
+                      "object"
+                    ],
+                    "properties": {
+                      "allow_wildchars": {
+                        "type": [
+                          "boolean"
+                        ]
+                      },
+                      "domain_name": {
+                        "type": [
+                          "string"
+                        ],
+                        "minLength": 1
+                      }
+                    }
+                  }
+                },
+                "email_domains": {
+                  "type": [
+                    "array"
+                  ],
+                  "items": {
+                    "type": [
+                      "string"
+                    ]
+                  }
+                },
+                "list_values": {
+                  "type": [
+                    "array"
+                  ],
+                  "items": {
+                    "type": [
+                      "string"
+                    ]
+                  }
+                },
+                "max_length": {
+                  "type": [
+                    "integer"
+                  ]
+                },
+                "max_value": {
+                  "type": [
+                    "integer"
+                  ]
+                },
+                "min_length": {
+                  "type": [
+                    "integer"
+                  ]
+                },
+                "min_value": {
+                  "type": [
+                    "integer"
+                  ]
+                },
+                "only_ipv4": {
+                  "type": [
+                    "boolean"
+                  ]
+                },
+                "only_ipv6": {
+                  "type": [
+                    "boolean"
+                  ]
+                },
+                "pattern": {
+                  "type": [
+                    "string"
+                  ]
+                },
+                "type": {
+                  "type": [
+                    "string"
+                  ],
+                  "pattern": "^(integer|text|email|url|domain-name|ip-address|in-list|regex)$"
+                }
+              }
+            },
+            "example": {
+              "type": [
+                "string"
+              ],
+              "maxLength": 512
+            },
+            "fieldName": {
+              "type": [
+                "string"
+              ]
+            },
+            "max": {
+              "type": [
+                "integer"
+              ],
+              "minimum": 1
+            },
+            "min": {
+              "type": [
+                "integer"
+              ],
+              "minimum": 1
+            },
+            "required": {
+              "type": [
+                "boolean"
+              ]
+            },
+            "value": {
+              "type": [
+                "string"
+              ],
+              "maxLength": 512
+            }
+          }
+        },
+        "registered_id": {
+          "title": "SubjectFieldConfig",
+          "description": "Subject Field Validation JsonClassDescription",
+          "type": [
+            "object"
+          ],
+          "properties": {
+            "constraints": {
+              "title": "SubjectFieldConfig.ConstraintConfig",
+              "type": [
+                "object"
+              ],
+              "properties": {
+                "domain_names": {
+                  "type": [
+                    "array"
+                  ],
+                  "items": {
+                    "title": "DomainNameConstraint",
+                    "type": [
+                      "object"
+                    ],
+                    "properties": {
+                      "allow_wildchars": {
+                        "type": [
+                          "boolean"
+                        ]
+                      },
+                      "domain_name": {
+                        "type": [
+                          "string"
+                        ],
+                        "minLength": 1
+                      }
+                    }
+                  }
+                },
+                "email_domains": {
+                  "type": [
+                    "array"
+                  ],
+                  "items": {
+                    "type": [
+                      "string"
+                    ]
+                  }
+                },
+                "list_values": {
+                  "type": [
+                    "array"
+                  ],
+                  "items": {
+                    "type": [
+                      "string"
+                    ]
+                  }
+                },
+                "max_length": {
+                  "type": [
+                    "integer"
+                  ]
+                },
+                "max_value": {
+                  "type": [
+                    "integer"
+                  ]
+                },
+                "min_length": {
+                  "type": [
+                    "integer"
+                  ]
+                },
+                "min_value": {
+                  "type": [
+                    "integer"
+                  ]
+                },
+                "only_ipv4": {
+                  "type": [
+                    "boolean"
+                  ]
+                },
+                "only_ipv6": {
+                  "type": [
+                    "boolean"
+                  ]
+                },
+                "pattern": {
+                  "type": [
+                    "string"
+                  ]
+                },
+                "type": {
+                  "type": [
+                    "string"
+                  ],
+                  "pattern": "^(integer|text|email|url|domain-name|ip-address|in-list|regex)$"
+                }
+              }
+            },
+            "example": {
+              "type": [
+                "string"
+              ],
+              "maxLength": 512
+            },
+            "fieldName": {
+              "type": [
+                "string"
+              ]
+            },
+            "max": {
+              "type": [
+                "integer"
+              ],
+              "minimum": 1
+            },
+            "min": {
+              "type": [
+                "integer"
+              ],
+              "minimum": 1
+            },
+            "required": {
+              "type": [
+                "boolean"
+              ]
+            },
+            "value": {
+              "type": [
+                "string"
+              ],
+              "maxLength": 512
+            }
+          }
+        },
+        "srv_name": {
+          "title": "SubjectFieldConfig",
+          "description": "Subject Field Validation JsonClassDescription",
+          "type": [
+            "object"
+          ],
+          "properties": {
+            "constraints": {
+              "title": "SubjectFieldConfig.ConstraintConfig",
+              "type": [
+                "object"
+              ],
+              "properties": {
+                "domain_names": {
+                  "type": [
+                    "array"
+                  ],
+                  "items": {
+                    "title": "DomainNameConstraint",
+                    "type": [
+                      "object"
+                    ],
+                    "properties": {
+                      "allow_wildchars": {
+                        "type": [
+                          "boolean"
+                        ]
+                      },
+                      "domain_name": {
+                        "type": [
+                          "string"
+                        ],
+                        "minLength": 1
+                      }
+                    }
+                  }
+                },
+                "email_domains": {
+                  "type": [
+                    "array"
+                  ],
+                  "items": {
+                    "type": [
+                      "string"
+                    ]
+                  }
+                },
+                "list_values": {
+                  "type": [
+                    "array"
+                  ],
+                  "items": {
+                    "type": [
+                      "string"
+                    ]
+                  }
+                },
+                "max_length": {
+                  "type": [
+                    "integer"
+                  ]
+                },
+                "max_value": {
+                  "type": [
+                    "integer"
+                  ]
+                },
+                "min_length": {
+                  "type": [
+                    "integer"
+                  ]
+                },
+                "min_value": {
+                  "type": [
+                    "integer"
+                  ]
+                },
+                "only_ipv4": {
+                  "type": [
+                    "boolean"
+                  ]
+                },
+                "only_ipv6": {
+                  "type": [
+                    "boolean"
+                  ]
+                },
+                "pattern": {
+                  "type": [
+                    "string"
+                  ]
+                },
+                "type": {
+                  "type": [
+                    "string"
+                  ],
+                  "pattern": "^(integer|text|email|url|domain-name|ip-address|in-list|regex)$"
+                }
+              }
+            },
+            "example": {
+              "type": [
+                "string"
+              ],
+              "maxLength": 512
+            },
+            "fieldName": {
+              "type": [
+                "string"
+              ]
+            },
+            "max": {
+              "type": [
+                "integer"
+              ],
+              "minimum": 1
+            },
+            "min": {
+              "type": [
+                "integer"
+              ],
+              "minimum": 1
+            },
+            "required": {
+              "type": [
+                "boolean"
+              ]
+            },
+            "value": {
+              "type": [
+                "string"
+              ],
+              "maxLength": 512
+            }
+          }
+        },
+        "subject_identification_method": {
+          "title": "SubjectFieldConfig",
+          "description": "Subject Field Validation JsonClassDescription",
+          "type": [
+            "object"
+          ],
+          "properties": {
+            "constraints": {
+              "title": "SubjectFieldConfig.ConstraintConfig",
+              "type": [
+                "object"
+              ],
+              "properties": {
+                "domain_names": {
+                  "type": [
+                    "array"
+                  ],
+                  "items": {
+                    "title": "DomainNameConstraint",
+                    "type": [
+                      "object"
+                    ],
+                    "properties": {
+                      "allow_wildchars": {
+                        "type": [
+                          "boolean"
+                        ]
+                      },
+                      "domain_name": {
+                        "type": [
+                          "string"
+                        ],
+                        "minLength": 1
+                      }
+                    }
+                  }
+                },
+                "email_domains": {
+                  "type": [
+                    "array"
+                  ],
+                  "items": {
+                    "type": [
+                      "string"
+                    ]
+                  }
+                },
+                "list_values": {
+                  "type": [
+                    "array"
+                  ],
+                  "items": {
+                    "type": [
+                      "string"
+                    ]
+                  }
+                },
+                "max_length": {
+                  "type": [
+                    "integer"
+                  ]
+                },
+                "max_value": {
+                  "type": [
+                    "integer"
+                  ]
+                },
+                "min_length": {
+                  "type": [
+                    "integer"
+                  ]
+                },
+                "min_value": {
+                  "type": [
+                    "integer"
+                  ]
+                },
+                "only_ipv4": {
+                  "type": [
+                    "boolean"
+                  ]
+                },
+                "only_ipv6": {
+                  "type": [
+                    "boolean"
+                  ]
+                },
+                "pattern": {
+                  "type": [
+                    "string"
+                  ]
+                },
+                "type": {
+                  "type": [
+                    "string"
+                  ],
+                  "pattern": "^(integer|text|email|url|domain-name|ip-address|in-list|regex)$"
+                }
+              }
+            },
+            "example": {
+              "type": [
+                "string"
+              ],
+              "maxLength": 512
+            },
+            "fieldName": {
+              "type": [
+                "string"
+              ]
+            },
+            "max": {
+              "type": [
+                "integer"
+              ],
+              "minimum": 1
+            },
+            "min": {
+              "type": [
+                "integer"
+              ],
+              "minimum": 1
+            },
+            "required": {
+              "type": [
+                "boolean"
+              ]
+            },
+            "value": {
+              "type": [
+                "string"
+              ],
+              "maxLength": 512
+            }
+          }
+        },
+        "uniform_resource_identifier": {
+          "title": "SubjectFieldConfig",
+          "description": "Subject Field Validation JsonClassDescription",
+          "type": [
+            "object"
+          ],
+          "properties": {
+            "constraints": {
+              "title": "SubjectFieldConfig.ConstraintConfig",
+              "type": [
+                "object"
+              ],
+              "properties": {
+                "domain_names": {
+                  "type": [
+                    "array"
+                  ],
+                  "items": {
+                    "title": "DomainNameConstraint",
+                    "type": [
+                      "object"
+                    ],
+                    "properties": {
+                      "allow_wildchars": {
+                        "type": [
+                          "boolean"
+                        ]
+                      },
+                      "domain_name": {
+                        "type": [
+                          "string"
+                        ],
+                        "minLength": 1
+                      }
+                    }
+                  }
+                },
+                "email_domains": {
+                  "type": [
+                    "array"
+                  ],
+                  "items": {
+                    "type": [
+                      "string"
+                    ]
+                  }
+                },
+                "list_values": {
+                  "type": [
+                    "array"
+                  ],
+                  "items": {
+                    "type": [
+                      "string"
+                    ]
+                  }
+                },
+                "max_length": {
+                  "type": [
+                    "integer"
+                  ]
+                },
+                "max_value": {
+                  "type": [
+                    "integer"
+                  ]
+                },
+                "min_length": {
+                  "type": [
+                    "integer"
+                  ]
+                },
+                "min_value": {
+                  "type": [
+                    "integer"
+                  ]
+                },
+                "only_ipv4": {
+                  "type": [
+                    "boolean"
+                  ]
+                },
+                "only_ipv6": {
+                  "type": [
+                    "boolean"
+                  ]
+                },
+                "pattern": {
+                  "type": [
+                    "string"
+                  ]
+                },
+                "type": {
+                  "type": [
+                    "string"
+                  ],
+                  "pattern": "^(integer|text|email|url|domain-name|ip-address|in-list|regex)$"
+                }
+              }
+            },
+            "example": {
+              "type": [
+                "string"
+              ],
+              "maxLength": 512
+            },
+            "fieldName": {
+              "type": [
+                "string"
+              ]
+            },
+            "max": {
+              "type": [
+                "integer"
+              ],
+              "minimum": 1
+            },
+            "min": {
+              "type": [
+                "integer"
+              ],
+              "minimum": 1
+            },
+            "required": {
+              "type": [
+                "boolean"
+              ]
+            },
+            "value": {
+              "type": [
+                "string"
+              ],
+              "maxLength": 512
+            }
+          }
+        },
+        "upn": {
+          "title": "SubjectFieldConfig",
+          "description": "Subject Field Validation JsonClassDescription",
+          "type": [
+            "object"
+          ],
+          "properties": {
+            "constraints": {
+              "title": "SubjectFieldConfig.ConstraintConfig",
+              "type": [
+                "object"
+              ],
+              "properties": {
+                "domain_names": {
+                  "type": [
+                    "array"
+                  ],
+                  "items": {
+                    "title": "DomainNameConstraint",
+                    "type": [
+                      "object"
+                    ],
+                    "properties": {
+                      "allow_wildchars": {
+                        "type": [
+                          "boolean"
+                        ]
+                      },
+                      "domain_name": {
+                        "type": [
+                          "string"
+                        ],
+                        "minLength": 1
+                      }
+                    }
+                  }
+                },
+                "email_domains": {
+                  "type": [
+                    "array"
+                  ],
+                  "items": {
+                    "type": [
+                      "string"
+                    ]
+                  }
+                },
+                "list_values": {
+                  "type": [
+                    "array"
+                  ],
+                  "items": {
+                    "type": [
+                      "string"
+                    ]
+                  }
+                },
+                "max_length": {
+                  "type": [
+                    "integer"
+                  ]
+                },
+                "max_value": {
+                  "type": [
+                    "integer"
+                  ]
+                },
+                "min_length": {
+                  "type": [
+                    "integer"
+                  ]
+                },
+                "min_value": {
+                  "type": [
+                    "integer"
+                  ]
+                },
+                "only_ipv4": {
+                  "type": [
+                    "boolean"
+                  ]
+                },
+                "only_ipv6": {
+                  "type": [
+                    "boolean"
+                  ]
+                },
+                "pattern": {
+                  "type": [
+                    "string"
+                  ]
+                },
+                "type": {
+                  "type": [
+                    "string"
+                  ],
+                  "pattern": "^(integer|text|email|url|domain-name|ip-address|in-list|regex)$"
+                }
+              }
+            },
+            "example": {
+              "type": [
+                "string"
+              ],
+              "maxLength": 512
+            },
+            "fieldName": {
+              "type": [
+                "string"
+              ]
+            },
+            "max": {
+              "type": [
+                "integer"
+              ],
+              "minimum": 1
+            },
+            "min": {
+              "type": [
+                "integer"
+              ],
+              "minimum": 1
+            },
+            "required": {
+              "type": [
+                "boolean"
+              ]
+            },
+            "value": {
+              "type": [
+                "string"
+              ],
+              "maxLength": 512
+            }
+          }
+        },
+        "x400_address": {
+          "title": "SubjectFieldConfig",
+          "description": "Subject Field Validation JsonClassDescription",
+          "type": [
+            "object"
+          ],
+          "properties": {
+            "constraints": {
+              "title": "SubjectFieldConfig.ConstraintConfig",
+              "type": [
+                "object"
+              ],
+              "properties": {
+                "domain_names": {
+                  "type": [
+                    "array"
+                  ],
+                  "items": {
+                    "title": "DomainNameConstraint",
+                    "type": [
+                      "object"
+                    ],
+                    "properties": {
+                      "allow_wildchars": {
+                        "type": [
+                          "boolean"
+                        ]
+                      },
+                      "domain_name": {
+                        "type": [
+                          "string"
+                        ],
+                        "minLength": 1
+                      }
+                    }
+                  }
+                },
+                "email_domains": {
+                  "type": [
+                    "array"
+                  ],
+                  "items": {
+                    "type": [
+                      "string"
+                    ]
+                  }
+                },
+                "list_values": {
+                  "type": [
+                    "array"
+                  ],
+                  "items": {
+                    "type": [
+                      "string"
+                    ]
+                  }
+                },
+                "max_length": {
+                  "type": [
+                    "integer"
+                  ]
+                },
+                "max_value": {
+                  "type": [
+                    "integer"
+                  ]
+                },
+                "min_length": {
+                  "type": [
+                    "integer"
+                  ]
+                },
+                "min_value": {
+                  "type": [
+                    "integer"
+                  ]
+                },
+                "only_ipv4": {
+                  "type": [
+                    "boolean"
+                  ]
+                },
+                "only_ipv6": {
+                  "type": [
+                    "boolean"
+                  ]
+                },
+                "pattern": {
+                  "type": [
+                    "string"
+                  ]
+                },
+                "type": {
+                  "type": [
+                    "string"
+                  ],
+                  "pattern": "^(integer|text|email|url|domain-name|ip-address|in-list|regex)$"
+                }
+              }
+            },
+            "example": {
+              "type": [
+                "string"
+              ],
+              "maxLength": 512
+            },
+            "fieldName": {
+              "type": [
+                "string"
+              ]
+            },
+            "max": {
+              "type": [
+                "integer"
+              ],
+              "minimum": 1
+            },
+            "min": {
+              "type": [
+                "integer"
+              ],
+              "minimum": 1
+            },
+            "required": {
+              "type": [
+                "boolean"
+              ]
+            },
+            "value": {
+              "type": [
+                "string"
+              ],
+              "maxLength": 512
+            }
+          }
+        },
+        "xmpp_address": {
+          "title": "SubjectFieldConfig",
+          "description": "Subject Field Validation JsonClassDescription",
+          "type": [
+            "object"
+          ],
+          "properties": {
+            "constraints": {
+              "title": "SubjectFieldConfig.ConstraintConfig",
+              "type": [
+                "object"
+              ],
+              "properties": {
+                "domain_names": {
+                  "type": [
+                    "array"
+                  ],
+                  "items": {
+                    "title": "DomainNameConstraint",
+                    "type": [
+                      "object"
+                    ],
+                    "properties": {
+                      "allow_wildchars": {
+                        "type": [
+                          "boolean"
+                        ]
+                      },
+                      "domain_name": {
+                        "type": [
+                          "string"
+                        ],
+                        "minLength": 1
+                      }
+                    }
+                  }
+                },
+                "email_domains": {
+                  "type": [
+                    "array"
+                  ],
+                  "items": {
+                    "type": [
+                      "string"
+                    ]
+                  }
+                },
+                "list_values": {
+                  "type": [
+                    "array"
+                  ],
+                  "items": {
+                    "type": [
+                      "string"
+                    ]
+                  }
+                },
+                "max_length": {
+                  "type": [
+                    "integer"
+                  ]
+                },
+                "max_value": {
+                  "type": [
+                    "integer"
+                  ]
+                },
+                "min_length": {
+                  "type": [
+                    "integer"
+                  ]
+                },
+                "min_value": {
+                  "type": [
+                    "integer"
+                  ]
+                },
+                "only_ipv4": {
+                  "type": [
+                    "boolean"
+                  ]
+                },
+                "only_ipv6": {
+                  "type": [
+                    "boolean"
+                  ]
+                },
+                "pattern": {
+                  "type": [
+                    "string"
+                  ]
+                },
+                "type": {
+                  "type": [
+                    "string"
+                  ],
+                  "pattern": "^(integer|text|email|url|domain-name|ip-address|in-list|regex)$"
+                }
+              }
+            },
+            "example": {
+              "type": [
+                "string"
+              ],
+              "maxLength": 512
+            },
+            "fieldName": {
+              "type": [
+                "string"
+              ]
+            },
+            "max": {
+              "type": [
+                "integer"
+              ],
+              "minimum": 1
+            },
+            "min": {
+              "type": [
+                "integer"
+              ],
+              "minimum": 1
+            },
+            "required": {
+              "type": [
+                "boolean"
+              ]
+            },
+            "value": {
+              "type": [
+                "string"
+              ],
+              "maxLength": 512
+            }
+          }
+        }
+      }
+    },
+    "subject_directory_attributes": {
+      "title": "SubjectDirectoryAttributesConfig",
+      "description": "Configuration for Subject Directory Attributes extension with individual fields for each SDA type.\n Each field corresponds to a specific SDA type as defined in AvailableSubjectDirectoryAttributes.\n \n <p>This configuration supports all standard X.509 Subject Directory Attribute types from RFC 3739:</p>\n <ul>\n <li>Personal identification: date of birth, place of birth, gender</li>\n <li>Citizenship and residence: country of citizenship, country of residence</li>\n </ul>",
+      "type": [
+        "object"
+      ],
+      "properties": {
+        "country_of_citizenship": {
+          "title": "SubjectFieldConfig",
+          "description": "Subject Field Validation JsonClassDescription",
+          "type": [
+            "object"
+          ],
+          "properties": {
+            "constraints": {
+              "title": "SubjectFieldConfig.ConstraintConfig",
+              "type": [
+                "object"
+              ],
+              "properties": {
+                "domain_names": {
+                  "type": [
+                    "array"
+                  ],
+                  "items": {
+                    "title": "DomainNameConstraint",
+                    "type": [
+                      "object"
+                    ],
+                    "properties": {
+                      "allow_wildchars": {
+                        "type": [
+                          "boolean"
+                        ]
+                      },
+                      "domain_name": {
+                        "type": [
+                          "string"
+                        ],
+                        "minLength": 1
+                      }
+                    }
+                  }
+                },
+                "email_domains": {
+                  "type": [
+                    "array"
+                  ],
+                  "items": {
+                    "type": [
+                      "string"
+                    ]
+                  }
+                },
+                "list_values": {
+                  "type": [
+                    "array"
+                  ],
+                  "items": {
+                    "type": [
+                      "string"
+                    ]
+                  }
+                },
+                "max_length": {
+                  "type": [
+                    "integer"
+                  ]
+                },
+                "max_value": {
+                  "type": [
+                    "integer"
+                  ]
+                },
+                "min_length": {
+                  "type": [
+                    "integer"
+                  ]
+                },
+                "min_value": {
+                  "type": [
+                    "integer"
+                  ]
+                },
+                "only_ipv4": {
+                  "type": [
+                    "boolean"
+                  ]
+                },
+                "only_ipv6": {
+                  "type": [
+                    "boolean"
+                  ]
+                },
+                "pattern": {
+                  "type": [
+                    "string"
+                  ]
+                },
+                "type": {
+                  "type": [
+                    "string"
+                  ],
+                  "pattern": "^(integer|text|email|url|domain-name|ip-address|in-list|regex)$"
+                }
+              }
+            },
+            "example": {
+              "type": [
+                "string"
+              ],
+              "maxLength": 512
+            },
+            "fieldName": {
+              "type": [
+                "string"
+              ]
+            },
+            "max": {
+              "type": [
+                "integer"
+              ],
+              "minimum": 1
+            },
+            "min": {
+              "type": [
+                "integer"
+              ],
+              "minimum": 1
+            },
+            "required": {
+              "type": [
+                "boolean"
+              ]
+            },
+            "value": {
+              "type": [
+                "string"
+              ],
+              "maxLength": 512
+            }
+          }
+        },
+        "country_of_residence": {
+          "title": "SubjectFieldConfig",
+          "description": "Subject Field Validation JsonClassDescription",
+          "type": [
+            "object"
+          ],
+          "properties": {
+            "constraints": {
+              "title": "SubjectFieldConfig.ConstraintConfig",
+              "type": [
+                "object"
+              ],
+              "properties": {
+                "domain_names": {
+                  "type": [
+                    "array"
+                  ],
+                  "items": {
+                    "title": "DomainNameConstraint",
+                    "type": [
+                      "object"
+                    ],
+                    "properties": {
+                      "allow_wildchars": {
+                        "type": [
+                          "boolean"
+                        ]
+                      },
+                      "domain_name": {
+                        "type": [
+                          "string"
+                        ],
+                        "minLength": 1
+                      }
+                    }
+                  }
+                },
+                "email_domains": {
+                  "type": [
+                    "array"
+                  ],
+                  "items": {
+                    "type": [
+                      "string"
+                    ]
+                  }
+                },
+                "list_values": {
+                  "type": [
+                    "array"
+                  ],
+                  "items": {
+                    "type": [
+                      "string"
+                    ]
+                  }
+                },
+                "max_length": {
+                  "type": [
+                    "integer"
+                  ]
+                },
+                "max_value": {
+                  "type": [
+                    "integer"
+                  ]
+                },
+                "min_length": {
+                  "type": [
+                    "integer"
+                  ]
+                },
+                "min_value": {
+                  "type": [
+                    "integer"
+                  ]
+                },
+                "only_ipv4": {
+                  "type": [
+                    "boolean"
+                  ]
+                },
+                "only_ipv6": {
+                  "type": [
+                    "boolean"
+                  ]
+                },
+                "pattern": {
+                  "type": [
+                    "string"
+                  ]
+                },
+                "type": {
+                  "type": [
+                    "string"
+                  ],
+                  "pattern": "^(integer|text|email|url|domain-name|ip-address|in-list|regex)$"
+                }
+              }
+            },
+            "example": {
+              "type": [
+                "string"
+              ],
+              "maxLength": 512
+            },
+            "fieldName": {
+              "type": [
+                "string"
+              ]
+            },
+            "max": {
+              "type": [
+                "integer"
+              ],
+              "minimum": 1
+            },
+            "min": {
+              "type": [
+                "integer"
+              ],
+              "minimum": 1
+            },
+            "required": {
+              "type": [
+                "boolean"
+              ]
+            },
+            "value": {
+              "type": [
+                "string"
+              ],
+              "maxLength": 512
+            }
+          }
+        },
+        "critical": {
+          "type": [
+            "boolean"
+          ]
+        },
+        "date_of_birth": {
+          "title": "SubjectFieldConfig",
+          "description": "Subject Field Validation JsonClassDescription",
+          "type": [
+            "object"
+          ],
+          "properties": {
+            "constraints": {
+              "title": "SubjectFieldConfig.ConstraintConfig",
+              "type": [
+                "object"
+              ],
+              "properties": {
+                "domain_names": {
+                  "type": [
+                    "array"
+                  ],
+                  "items": {
+                    "title": "DomainNameConstraint",
+                    "type": [
+                      "object"
+                    ],
+                    "properties": {
+                      "allow_wildchars": {
+                        "type": [
+                          "boolean"
+                        ]
+                      },
+                      "domain_name": {
+                        "type": [
+                          "string"
+                        ],
+                        "minLength": 1
+                      }
+                    }
+                  }
+                },
+                "email_domains": {
+                  "type": [
+                    "array"
+                  ],
+                  "items": {
+                    "type": [
+                      "string"
+                    ]
+                  }
+                },
+                "list_values": {
+                  "type": [
+                    "array"
+                  ],
+                  "items": {
+                    "type": [
+                      "string"
+                    ]
+                  }
+                },
+                "max_length": {
+                  "type": [
+                    "integer"
+                  ]
+                },
+                "max_value": {
+                  "type": [
+                    "integer"
+                  ]
+                },
+                "min_length": {
+                  "type": [
+                    "integer"
+                  ]
+                },
+                "min_value": {
+                  "type": [
+                    "integer"
+                  ]
+                },
+                "only_ipv4": {
+                  "type": [
+                    "boolean"
+                  ]
+                },
+                "only_ipv6": {
+                  "type": [
+                    "boolean"
+                  ]
+                },
+                "pattern": {
+                  "type": [
+                    "string"
+                  ]
+                },
+                "type": {
+                  "type": [
+                    "string"
+                  ],
+                  "pattern": "^(integer|text|email|url|domain-name|ip-address|in-list|regex)$"
+                }
+              }
+            },
+            "example": {
+              "type": [
+                "string"
+              ],
+              "maxLength": 512
+            },
+            "fieldName": {
+              "type": [
+                "string"
+              ]
+            },
+            "max": {
+              "type": [
+                "integer"
+              ],
+              "minimum": 1
+            },
+            "min": {
+              "type": [
+                "integer"
+              ],
+              "minimum": 1
+            },
+            "required": {
+              "type": [
+                "boolean"
+              ]
+            },
+            "value": {
+              "type": [
+                "string"
+              ],
+              "maxLength": 512
+            }
+          }
+        },
+        "enabled": {
+          "type": [
+            "boolean"
+          ]
+        },
+        "gender": {
+          "title": "SubjectFieldConfig",
+          "description": "Subject Field Validation JsonClassDescription",
+          "type": [
+            "object"
+          ],
+          "properties": {
+            "constraints": {
+              "title": "SubjectFieldConfig.ConstraintConfig",
+              "type": [
+                "object"
+              ],
+              "properties": {
+                "domain_names": {
+                  "type": [
+                    "array"
+                  ],
+                  "items": {
+                    "title": "DomainNameConstraint",
+                    "type": [
+                      "object"
+                    ],
+                    "properties": {
+                      "allow_wildchars": {
+                        "type": [
+                          "boolean"
+                        ]
+                      },
+                      "domain_name": {
+                        "type": [
+                          "string"
+                        ],
+                        "minLength": 1
+                      }
+                    }
+                  }
+                },
+                "email_domains": {
+                  "type": [
+                    "array"
+                  ],
+                  "items": {
+                    "type": [
+                      "string"
+                    ]
+                  }
+                },
+                "list_values": {
+                  "type": [
+                    "array"
+                  ],
+                  "items": {
+                    "type": [
+                      "string"
+                    ]
+                  }
+                },
+                "max_length": {
+                  "type": [
+                    "integer"
+                  ]
+                },
+                "max_value": {
+                  "type": [
+                    "integer"
+                  ]
+                },
+                "min_length": {
+                  "type": [
+                    "integer"
+                  ]
+                },
+                "min_value": {
+                  "type": [
+                    "integer"
+                  ]
+                },
+                "only_ipv4": {
+                  "type": [
+                    "boolean"
+                  ]
+                },
+                "only_ipv6": {
+                  "type": [
+                    "boolean"
+                  ]
+                },
+                "pattern": {
+                  "type": [
+                    "string"
+                  ]
+                },
+                "type": {
+                  "type": [
+                    "string"
+                  ],
+                  "pattern": "^(integer|text|email|url|domain-name|ip-address|in-list|regex)$"
+                }
+              }
+            },
+            "example": {
+              "type": [
+                "string"
+              ],
+              "maxLength": 512
+            },
+            "fieldName": {
+              "type": [
+                "string"
+              ]
+            },
+            "max": {
+              "type": [
+                "integer"
+              ],
+              "minimum": 1
+            },
+            "min": {
+              "type": [
+                "integer"
+              ],
+              "minimum": 1
+            },
+            "required": {
+              "type": [
+                "boolean"
+              ]
+            },
+            "value": {
+              "type": [
+                "string"
+              ],
+              "maxLength": 512
+            }
+          }
+        },
+        "place_of_birth": {
+          "title": "SubjectFieldConfig",
+          "description": "Subject Field Validation JsonClassDescription",
+          "type": [
+            "object"
+          ],
+          "properties": {
+            "constraints": {
+              "title": "SubjectFieldConfig.ConstraintConfig",
+              "type": [
+                "object"
+              ],
+              "properties": {
+                "domain_names": {
+                  "type": [
+                    "array"
+                  ],
+                  "items": {
+                    "title": "DomainNameConstraint",
+                    "type": [
+                      "object"
+                    ],
+                    "properties": {
+                      "allow_wildchars": {
+                        "type": [
+                          "boolean"
+                        ]
+                      },
+                      "domain_name": {
+                        "type": [
+                          "string"
+                        ],
+                        "minLength": 1
+                      }
+                    }
+                  }
+                },
+                "email_domains": {
+                  "type": [
+                    "array"
+                  ],
+                  "items": {
+                    "type": [
+                      "string"
+                    ]
+                  }
+                },
+                "list_values": {
+                  "type": [
+                    "array"
+                  ],
+                  "items": {
+                    "type": [
+                      "string"
+                    ]
+                  }
+                },
+                "max_length": {
+                  "type": [
+                    "integer"
+                  ]
+                },
+                "max_value": {
+                  "type": [
+                    "integer"
+                  ]
+                },
+                "min_length": {
+                  "type": [
+                    "integer"
+                  ]
+                },
+                "min_value": {
+                  "type": [
+                    "integer"
+                  ]
+                },
+                "only_ipv4": {
+                  "type": [
+                    "boolean"
+                  ]
+                },
+                "only_ipv6": {
+                  "type": [
+                    "boolean"
+                  ]
+                },
+                "pattern": {
+                  "type": [
+                    "string"
+                  ]
+                },
+                "type": {
+                  "type": [
+                    "string"
+                  ],
+                  "pattern": "^(integer|text|email|url|domain-name|ip-address|in-list|regex)$"
+                }
+              }
+            },
+            "example": {
+              "type": [
+                "string"
+              ],
+              "maxLength": 512
+            },
+            "fieldName": {
+              "type": [
+                "string"
+              ]
+            },
+            "max": {
+              "type": [
+                "integer"
+              ],
+              "minimum": 1
+            },
+            "min": {
+              "type": [
+                "integer"
+              ],
+              "minimum": 1
+            },
+            "required": {
+              "type": [
+                "boolean"
+              ]
+            },
+            "value": {
+              "type": [
+                "string"
+              ],
+              "maxLength": 512
+            }
+          }
+        }
+      }
+    },
+    "subject_information_access": {
+      "title": "AdvancedExtensionConfigs.SubjectInformationAccessConfig",
+      "type": [
+        "object"
+      ],
+      "properties": {
+        "access_descriptions": {
+          "type": [
+            "array"
+          ],
+          "items": {
+            "title": "AdvancedExtensionConfigs.AuthorityInformationAccessConfig.AccessDescriptionConfig",
+            "type": [
+              "object"
+            ],
+            "properties": {
+              "access_location": {
+                "title": "AdvancedExtensionConfigs.GeneralNameConfig",
+                "type": [
+                  "object"
+                ],
+                "properties": {
+                  "type": {
+                    "type": [
+                      "string"
+                    ],
+                    "minLength": 1,
+                    "pattern": "^(uri|dNSName|iPAddress|directoryName|ediPartyName|uniformResourceIdentifier|registeredID)$"
+                  },
+                  "value": {
+                    "type": [
+                      "string"
+                    ],
+                    "minLength": 1
+                  }
+                }
+              },
+              "access_method": {
+                "type": [
+                  "string"
+                ],
+                "minLength": 1,
+                "pattern": "^(ocsp|caIssuers|timeStamping)$"
+              }
+            }
+          }
+        },
+        "critical": {
+          "type": [
+            "boolean"
+          ]
+        },
+        "enabled": {
+          "type": [
+            "boolean"
+          ]
+        }
+      }
+    },
+    "subject_key_identifier": {
+      "title": "ExtensionConfigs.ExtensionConfig",
+      "type": [
+        "object"
+      ],
+      "properties": {
+        "critical": {
+          "type": [
+            "boolean"
+          ]
+        },
+        "enabled": {
+          "type": [
+            "boolean"
+          ]
+        }
+      }
+    },
+    "template": {
+      "type": [
+        "boolean"
+      ]
+    },
+    "validity": {
+      "title": "ExtensionConfigs.ValidityConfig",
+      "type": [
+        "object"
+      ],
+      "properties": {
+        "allow_override": {
+          "type": [
+            "boolean"
+          ]
+        },
+        "duration": {
+          "type": [
+            "string"
+          ],
+          "minLength": 1,
+          "pattern": "^\\d+[ydhms]$"
+        }
+      }
+    },
+    "version": {
+      "type": [
+        "integer"
+      ],
+      "maximum": 2,
+      "minimum": 0
+    }
+  },
+  "required": [
+    "template"
+  ]
+}
