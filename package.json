@@ -18,6 +18,18 @@
           "*.certprofile.yml"
         ],
         "url": "./schemas/certificate-profile.schema.json"
+      },
+      {
+        "fileMatch": [
+          "*.caprofile.yml"
+        ],
+        "url": "./schemas/ca-profile.schema.json"
+      },
+      {
+        "fileMatch": [
+          "*.keystore.yml"
+        ],
+        "url": "./schemas/keystore.schema.json"
       }
     ]
   },

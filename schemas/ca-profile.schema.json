@@ -17,6 +17,22 @@
       },
       "description" : "Access description configuration for authority information access"
     },
+    "CrlExtensionConfig" : {
+      "type" : "object",
+      "properties" : {
+        "critical" : {
+          "type" : "boolean",
+          "description" : "Whether the extension is critical",
+          "default" : "false"
+        },
+        "enabled" : {
+          "type" : "boolean",
+          "description" : "Whether the extension is enabled",
+          "default" : "true"
+        }
+      },
+      "description" : "CRL extension configuration"
+    },
     "DistributionPointConfig" : {
       "type" : "object",
       "properties" : {
@@ -268,8 +284,8 @@
     },
     "ca" : {
       "type" : "string",
-      "description" : "Certificate Authority identifier for issuing certificates (maximum 256 characters)",
-      "maxLength" : 256
+      "description" : "Parent CA reference for certificate hierarchy. Use 'self-signed' for root CAs, 'external' for externally signed CAs, or the name of another CA profile for intermediate CAs",
+      "minLength" : 1
     },
     "certificate_policies" : {
       "type" : "object",
@@ -324,6 +340,115 @@
         }
       },
       "description" : "Certificate policies extension configuration"
+    },
+    "crl" : {
+      "allOf" : [ {
+        "type" : "object",
+        "properties" : {
+          "delta" : {
+            "allOf" : [ {
+              "type" : "object",
+              "properties" : {
+                "enabled" : {
+                  "type" : "boolean",
+                  "description" : "Whether delta CRLs are enabled",
+                  "default" : "false"
+                },
+                "overlap_time" : {
+                  "type" : "string",
+                  "description" : "Overlap time before delta CRL expiration. Supports time units: y, d, h, m, s",
+                  "pattern" : "^\\d+[ydhms]$"
+                },
+                "validity" : {
+                  "type" : "string",
+                  "description" : "Delta CRL validity period. Supports time units: y, d, h, m, s",
+                  "pattern" : "^\\d+[ydhms]$"
+                }
+              },
+              "description" : "Delta CRL generation configuration"
+            }, {
+              "description" : "Delta CRL configuration settings"
+            } ]
+          },
+          "enabled" : {
+            "type" : "boolean",
+            "description" : "Whether CRL generation is enabled for this CA",
+            "default" : "true"
+          },
+          "extensions" : {
+            "type" : "object",
+            "properties" : {
+              "authority_key_identifier" : {
+                "$ref" : "#/$defs/CrlExtensionConfig",
+                "description" : "Authority Key Identifier extension configuration"
+              },
+              "crl_number" : {
+                "$ref" : "#/$defs/CrlExtensionConfig",
+                "description" : "CRL Number extension configuration"
+              },
+              "issuing_distribution_point" : {
+                "type" : "object",
+                "properties" : {
+                  "critical" : {
+                    "type" : "boolean",
+                    "description" : "Whether the extension is critical",
+                    "default" : "false"
+                  },
+                  "enabled" : {
+                    "type" : "boolean",
+                    "description" : "Whether the extension is enabled",
+                    "default" : "true"
+                  },
+                  "uri" : {
+                    "type" : "string",
+                    "description" : "Distribution point URI"
+                  }
+                },
+                "description" : "Issuing Distribution Point extension configuration"
+              }
+            },
+            "description" : "CRL extensions configuration"
+          },
+          "full" : {
+            "allOf" : [ {
+              "type" : "object",
+              "properties" : {
+                "issue_interval" : {
+                  "type" : "string",
+                  "description" : "Interval between CRL generations. Supports time units: y, d, h, m, s",
+                  "minLength" : 1,
+                  "pattern" : "^\\d+[ydhms]$"
+                },
+                "overlap_time" : {
+                  "type" : "string",
+                  "description" : "Overlap time before CRL expiration to generate new CRL. Supports time units: y, d, h, m, s",
+                  "minLength" : 1,
+                  "pattern" : "^\\d+[ydhms]$"
+                },
+                "validity" : {
+                  "type" : "string",
+                  "description" : "CRL validity period. Supports time units: y, d, h, m, s",
+                  "minLength" : 1,
+                  "pattern" : "^\\d+[ydhms]$"
+                }
+              },
+              "required" : [ "issue_interval", "overlap_time", "validity" ],
+              "description" : "Full CRL generation configuration"
+            }, {
+              "description" : "Full CRL configuration settings"
+            } ]
+          },
+          "keep_expired_certs" : {
+            "type" : "boolean",
+            "description" : "Whether to include expired certificates in CRLs",
+            "default" : "false"
+          }
+        },
+        "required" : [ "full" ],
+        "description" : "CRL generation and distribution configuration"
+      }, {
+        "description" : "Certificate Revocation List (CRL) generation and distribution configuration"
+      } ]
     },
     "crl_distribution_points" : {
       "type" : "object",
@@ -509,6 +634,100 @@
         }
       },
       "description" : "Key usage extension configuration"
+    },
+    "keystore" : {
+      "allOf" : [ {
+        "type" : "object",
+        "properties" : {
+          "generate_keys" : {
+            "type" : "boolean",
+            "description" : "Whether to generate keys if they don't exist in the keystore",
+            "default" : "false"
+          },
+          "key_ids" : {
+            "allOf" : [ {
+              "type" : "object",
+              "properties" : {
+                "certificate_sign" : {
+                  "type" : "string",
+                  "description" : "Key identifier specifically for certificate signing operations"
+                },
+                "crl_sign" : {
+                  "type" : "string",
+                  "description" : "Key identifier specifically for CRL signing operations"
+                },
+                "default" : {
+                  "type" : "string",
+                  "description" : "Default key identifier used for all operations when specific keys are not defined",
+                  "minLength" : 1
+                }
+              },
+              "required" : [ "default" ],
+              "description" : "Key identifier mapping for different CA cryptographic operations"
+            }, {
+              "description" : "Key identifiers for different cryptographic operations"
+            } ]
+          },
+          "key_specification" : {
+            "allOf" : [ {
+              "type" : "object",
+              "properties" : {
+                "algorithm" : {
+                  "type" : "string",
+                  "description" : "Cryptographic algorithm for key generation",
+                  "default" : "RSA",
+                  "enum" : [ "RSA", "EC", "Ed25519", "Ed448" ]
+                },
+                "curve" : {
+                  "type" : "string",
+                  "description" : "Elliptic curve name (for EC keys)",
+                  "enum" : [ "secp256r1", "secp384r1", "secp521r1", "prime256v1", "prime384v1", "prime521v1" ]
+                },
+                "key_size" : {
+                  "type" : "integer",
+                  "description" : "Key size in bits (for RSA keys)",
+                  "enum" : [ "2048", "3072", "4096" ]
+                }
+              },
+              "description" : "Key generation parameters for creating new cryptographic keys"
+            }, {
+              "description" : "Key generation parameters. Required if generate_keys is true"
+            } ]
+          },
+          "name" : {
+            "type" : "string",
+            "description" : "Unique keystore identifier. For PKCS12 keystores, this is also used as the filename",
+            "minLength" : 1
+          },
+          "pkcs12" : {
+            "allOf" : [ {
+              "type" : "object",
+              "properties" : {
+                "auto_activate" : {
+                  "type" : "boolean",
+                  "description" : "Whether to automatically activate the keystore on startup",
+                  "default" : "true"
+                },
+                "password" : {
+                  "type" : "string",
+                  "description" : "Direct password for PKCS12 keystore (test environments only - not recommended for production)"
+                },
+                "password_env_var" : {
+                  "type" : "string",
+                  "description" : "Environment variable containing the PKCS12 password"
+                }
+              },
+              "description" : "PKCS12 keystore configuration for file-based keystores"
+            }, {
+              "description" : "PKCS12-specific configuration. When present, indicates an embedded PKCS12 keystore should be used instead of referencing a separate keystore configuration"
+            } ]
+          }
+        },
+        "required" : [ "key_ids", "name" ],
+        "description" : "Keystore configuration for Certificate Authority private keys and cryptographic operations"
+      }, {
+        "description" : "Keystore configuration for CA private keys and cryptographic operations"
+      } ]
     },
     "name" : {
       "type" : "string",
@@ -915,6 +1134,11 @@
         "enum" : [ "date_of_birth", "place_of_birth", "gender", "country_of_citizenship", "country_of_residence" ]
       } ]
     },
+    "subject_dn" : {
+      "type" : "string",
+      "description" : "Distinguished Name of the Certificate Authority in X.500 format",
+      "minLength" : 1
+    },
     "subject_information_access" : {
       "type" : "object",
       "properties" : {
@@ -973,6 +1197,6 @@
       "maximum" : 2
     }
   },
-  "title" : "CertificateProfile",
-  "description" : "Complete X.509 certificate profile specification including subject fields, extensions, validity periods, and cryptographic parameters. Supports template inheritance and follows RFC 5280 standards for enterprise PKI environments."
+  "required" : [ "keystore", "subject_dn" ],
+  "description" : "Certificate Authority profile configuration extending certificate profiles with CA-specific settings"
 }

@@ -5,15 +5,26 @@ It enables IntelliSense, validation, and autocompletion for the supported config
 
 ## Supported Configuration Files
 
-*Note:* all configuration files must end with exact lower case match and end with .yml.
-The structure of a configuration file is <name>.<type>.yml and the name must be the same
+*Note:* All configuration files must end with exact lower case match and end with .yml.
+The structure of a configuration file is `<name>.<type>.yml` and the name must be the same
 string value as in the 'name' field in the YAML file.
 
 Name can have the characters 'a-z', 'A-Z', '0-9' and the '-','_' characters.
 
-* CertificateProfile: <name>.certprofile.yml
+### Configuration Types
 
-Example: _test_profile.certprofile.yml_
+* **Certificate Profile**: `<name>.certprofile.yml`
+  - Complete X.509 certificate profile specification
+  - Includes subject fields, extensions, validity periods, and cryptographic parameters
+  - Example: `my_cert_profile.certprofile.yml`
+
+* **CA Profile**: `<name>.caprofile.yml`
+  - Certificate Authority profile configuration
+  - Example: `my_ca_profile.caprofile.yml`
+
+* **Keystore**: `<name>.keystore.yml`
+  - Keystore configuration settings
+  - Example: `my_keystore.keystore.yml`
 
 ## Prerequisites
 
@@ -73,20 +84,31 @@ code --install-extension acs-vscode-schema-support-0.0.1.vsix
 
 ## Features
 
-- **Schema Validation**: Automatic validation of `*.certprofile.yml` files against X.509 certificate profile schemas
-- **IntelliSense**: Code completion and suggestions for certificate configuration properties
+- **Schema Validation**: Automatic validation of ACS configuration files against their respective schemas
+  - `*.certprofile.yml` - X.509 certificate profile validation
+  - `*.caprofile.yml` - Certificate Authority profile validation  
+  - `*.keystore.yml` - Keystore configuration validation
+- **IntelliSense**: Code completion and suggestions for configuration properties
 - **Error Highlighting**: Real-time validation with error messages for invalid configurations
 - **Documentation**: Hover tooltips with property descriptions and valid values
 
 ## Usage
 
-Once installed, the extension automatically provides schema support for any file with the `.certprofile.yml` extension. The schema includes comprehensive validation for:
+Once installed, the extension automatically provides schema support for all supported configuration file types:
 
+### Certificate Profile (*.certprofile.yml)
+Comprehensive validation including:
 - Certificate subject fields and constraints
 - X.509 certificate extensions (Basic Constraints, Key Usage, etc.)
 - Subject Alternative Names with various field types
 - Certificate policies and advanced extensions
 - Cryptographic parameters and validity periods
+
+### CA Profile (*.caprofile.yml)
+Certificate Authority configuration validation
+
+### Keystore (*.keystore.yml)
+Keystore configuration validation
 
 ## Development
 
@@ -102,5 +124,7 @@ Once installed, the extension automatically provides schema support for any file
 
 - `src/extension.ts` - Main extension entry point
 - `schemas/certificate-profile.schema.json` - JSON schema for certificate profiles
+- `schemas/ca-profile.schema.json` - JSON schema for CA profiles
+- `schemas/keystore.schema.json` - JSON schema for keystore configurations
 - `package.json` - Extension manifest and configuration
 
