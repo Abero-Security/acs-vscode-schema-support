@@ -4,7 +4,7 @@ All notable changes to the "ACS YAML Schema Support" extension will be documente
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/).
 
-## [1.0.0] - 2026-02-01
+## [0.1.0] - 2026-02-13
 
 ### Added
 
