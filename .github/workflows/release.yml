@@ -1,0 +1,48 @@
+name: Build and Upload Release Assets
+
+on:
+  release:
+    types: [ published ]
+
+jobs:
+  build-and-upload:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+
+      - name: Install vsce
+        run: npm install -g @vscode/vsce
+
+      - name: Set version from release
+        id: version
+        run: |
+          VERSION="${{ github.event.release.tag_name }}"
+          # Strip leading 'v' if present (e.g. v1.0.0 -> 1.0.0)
+          VERSION="${VERSION#v}"
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          echo "Using release version: $VERSION"
+          npm version "$VERSION" --no-git-tag-version
+
+      - name: Package extension
+        run: vsce package --out acs-schema-support-${{ steps.version.outputs.version }}.vsix
+
+      - name: Upload Release Assets
+        uses: softprops/action-gh-release@v2
+        with:
+          files: acs-schema-support-${{ steps.version.outputs.version }}.vsix
+          fail_on_unmatched_files: true
+
+      - name: Publish to VS Code Marketplace
+        run: vsce publish --packagePath acs-schema-support-${{ steps.version.outputs.version }}.vsix
+        env:
+          VSCE_PAT: ${{ secrets.VSCE_PAT }}
