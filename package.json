@@ -1,5 +1,5 @@
 {
-  "name": "acs-vscode-schema-support",
+  "name": "acs-schema-support",
   "displayName": "ACS YAML Schema Support",
   "description": "Adds YAML Schema Support to VSCode for Agile Certificate Services configuration files.",
   "version": "0.0.0",

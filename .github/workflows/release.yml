@@ -37,15 +37,15 @@ jobs:
         run: npm install
 
       - name: Package extension
-        run: vsce package --out acs-vscode-schema-support-${{ steps.version.outputs.version }}.vsix
+        run: vsce package --out acs-schema-support-${{ steps.version.outputs.version }}.vsix
 
       - name: Upload Release Assets
         uses: softprops/action-gh-release@v2
         with:
-          files: acs-vscode-schema-support-${{ steps.version.outputs.version }}.vsix
+          files: acs-schema-support-${{ steps.version.outputs.version }}.vsix
           fail_on_unmatched_files: true
 
-      # - name: Publish to VS Code Marketplace
-      #   run: vsce publish --packagePath acs-vscode-schema-support-${{ steps.version.outputs.version }}.vsix
-      #   env:
-      #     VSCE_PAT: ${{ secrets.VSCE_PAT }}
+      - name: Publish to VS Code Marketplace
+        run: vsce publish --packagePath acs-schema-support-${{ steps.version.outputs.version }}.vsix
+        env:
+          VSCE_PAT: ${{ secrets.VSCE_PAT }}

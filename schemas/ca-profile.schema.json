@@ -23,12 +23,12 @@
         "critical" : {
           "type" : "boolean",
           "description" : "Whether the extension is critical",
-          "default" : "false"
+          "default" : false
         },
         "enabled" : {
           "type" : "boolean",
           "description" : "Whether the extension is enabled",
-          "default" : "true"
+          "default" : true
         }
       },
       "description" : "CRL extension configuration"
@@ -45,10 +45,10 @@
         },
         "reasons" : {
           "description" : "Reasons for certificate revocation",
-          "enum" : [ "keyCompromise", "caCompromise", "affiliationChanged", "superseded", "cessationOfOperation", "certificateHold", "privilegeWithdrawn", "aACompromise" ],
           "type" : "array",
           "items" : {
-            "type" : "string"
+            "type" : "string",
+            "enum" : [ "keyCompromise", "caCompromise", "affiliationChanged", "superseded", "cessationOfOperation", "certificateHold", "privilegeWithdrawn", "aACompromise" ]
           }
         }
       },
@@ -60,12 +60,12 @@
         "critical" : {
           "type" : "boolean",
           "description" : "Whether the extension is marked as critical",
-          "default" : "false"
+          "default" : false
         },
         "enabled" : {
           "type" : "boolean",
           "description" : "Whether the extension is enabled",
-          "default" : "true"
+          "default" : true
         }
       },
       "description" : "Base configuration for certificate extensions"
@@ -103,7 +103,7 @@
                     "allow_wildchars" : {
                       "type" : "boolean",
                       "description" : "Whether wildcard characters are allowed in domain names",
-                      "default" : "false"
+                      "default" : false
                     },
                     "domain_name" : {
                       "type" : "string",
@@ -147,12 +147,12 @@
               "only_ipv4" : {
                 "type" : "boolean",
                 "description" : "Only allow IPv4 addresses (for ip-address type)",
-                "default" : "false"
+                "default" : false
               },
               "only_ipv6" : {
                 "type" : "boolean",
                 "description" : "Only allow IPv6 addresses (for ip-address type)",
-                "default" : "false"
+                "default" : false
               },
               "pattern" : {
                 "type" : "string",
@@ -187,19 +187,19 @@
         "max" : {
           "type" : "integer",
           "description" : "Maximum number of occurrences (minimum 1)",
-          "default" : "1",
+          "default" : 1,
           "minimum" : 1
         },
         "min" : {
           "type" : "integer",
           "description" : "Minimum number of occurrences (minimum 1)",
-          "default" : "1",
+          "default" : 1,
           "minimum" : 1
         },
         "required" : {
           "type" : "boolean",
           "description" : "Whether the field is required",
-          "default" : "false"
+          "default" : false
         },
         "value" : {
           "type" : "string",
@@ -242,12 +242,12 @@
         "critical" : {
           "type" : "boolean",
           "description" : "Whether the extension is marked as critical",
-          "default" : "false"
+          "default" : false
         },
         "enabled" : {
           "type" : "boolean",
           "description" : "Whether the extension is enabled",
-          "default" : "true"
+          "default" : true
         }
       },
       "description" : "Authority information access extension configuration"
@@ -262,17 +262,17 @@
         "ca" : {
           "type" : "boolean",
           "description" : "Whether this certificate is a CA certificate",
-          "default" : "false"
+          "default" : false
         },
         "critical" : {
           "type" : "boolean",
           "description" : "Whether the extension is marked as critical",
-          "default" : "false"
+          "default" : false
         },
         "enabled" : {
           "type" : "boolean",
           "description" : "Whether the extension is enabled",
-          "default" : "true"
+          "default" : true
         },
         "path_length" : {
           "type" : "integer",
@@ -293,12 +293,12 @@
         "critical" : {
           "type" : "boolean",
           "description" : "Whether the extension is marked as critical",
-          "default" : "false"
+          "default" : false
         },
         "enabled" : {
           "type" : "boolean",
           "description" : "Whether the extension is enabled",
-          "default" : "true"
+          "default" : true
         },
         "policies" : {
           "description" : "List of certificate policies",
@@ -352,7 +352,7 @@
                 "enabled" : {
                   "type" : "boolean",
                   "description" : "Whether delta CRLs are enabled",
-                  "default" : "false"
+                  "default" : false
                 },
                 "overlap_time" : {
                   "type" : "string",
@@ -373,7 +373,7 @@
           "enabled" : {
             "type" : "boolean",
             "description" : "Whether CRL generation is enabled for this CA",
-            "default" : "true"
+            "default" : true
           },
           "extensions" : {
             "type" : "object",
@@ -392,12 +392,12 @@
                   "critical" : {
                     "type" : "boolean",
                     "description" : "Whether the extension is critical",
-                    "default" : "false"
+                    "default" : false
                   },
                   "enabled" : {
                     "type" : "boolean",
                     "description" : "Whether the extension is enabled",
-                    "default" : "true"
+                    "default" : true
                   },
                   "uri" : {
                     "type" : "string",
@@ -441,7 +441,7 @@
           "keep_expired_certs" : {
             "type" : "boolean",
             "description" : "Whether to include expired certificates in CRLs",
-            "default" : "false"
+            "default" : false
           }
         },
         "required" : [ "full" ],
@@ -456,7 +456,7 @@
         "critical" : {
           "type" : "boolean",
           "description" : "Whether the extension is marked as critical",
-          "default" : "false"
+          "default" : false
         },
         "distribution_points" : {
           "description" : "List of CRL distribution points",
@@ -468,7 +468,7 @@
         "enabled" : {
           "type" : "boolean",
           "description" : "Whether the extension is enabled",
-          "default" : "true"
+          "default" : true
         }
       },
       "description" : "CRL distribution points extension configuration"
@@ -491,7 +491,7 @@
           "critical" : {
             "type" : "boolean",
             "description" : "Whether the extension is critical",
-            "default" : "false"
+            "default" : false
           },
           "data" : {
             "type" : "string",
@@ -534,12 +534,12 @@
         "critical" : {
           "type" : "boolean",
           "description" : "Whether the extension is marked as critical",
-          "default" : "false"
+          "default" : false
         },
         "enabled" : {
           "type" : "boolean",
           "description" : "Whether the extension is enabled",
-          "default" : "true"
+          "default" : true
         },
         "purposes" : {
           "description" : "List of extended key usage purposes (named purposes or OID format)",
@@ -569,7 +569,7 @@
         "critical" : {
           "type" : "boolean",
           "description" : "Whether the extension is marked as critical",
-          "default" : "false"
+          "default" : false
         },
         "distribution_points" : {
           "description" : "List of delta CRL distribution points",
@@ -581,7 +581,7 @@
         "enabled" : {
           "type" : "boolean",
           "description" : "Whether the extension is enabled",
-          "default" : "true"
+          "default" : true
         }
       },
       "description" : "Freshest CRL extension configuration (delta CRL distribution points)"
@@ -592,12 +592,12 @@
         "critical" : {
           "type" : "boolean",
           "description" : "Whether the extension is marked as critical",
-          "default" : "false"
+          "default" : false
         },
         "enabled" : {
           "type" : "boolean",
           "description" : "Whether the extension is enabled",
-          "default" : "true"
+          "default" : true
         },
         "skip_certs" : {
           "type" : "integer",
@@ -617,19 +617,19 @@
         "critical" : {
           "type" : "boolean",
           "description" : "Whether the extension is marked as critical",
-          "default" : "false"
+          "default" : false
         },
         "enabled" : {
           "type" : "boolean",
           "description" : "Whether the extension is enabled",
-          "default" : "true"
+          "default" : true
         },
         "purposes" : {
           "description" : "List of key usage purposes",
-          "enum" : [ "digital_signature", "non_repudiation", "key_encipherment", "data_encipherment", "key_agreement", "key_cert_sign", "crl_sign", "encipher_only", "decipher_only" ],
           "type" : "array",
           "items" : {
-            "type" : "string"
+            "type" : "string",
+            "enum" : [ "digital_signature", "non_repudiation", "key_encipherment", "data_encipherment", "key_agreement", "key_cert_sign", "crl_sign", "encipher_only", "decipher_only" ]
           }
         }
       },
@@ -642,7 +642,7 @@
           "generate_keys" : {
             "type" : "boolean",
             "description" : "Whether to generate keys if they don't exist in the keystore",
-            "default" : "false"
+            "default" : false
           },
           "key_ids" : {
             "allOf" : [ {
@@ -706,7 +706,7 @@
                 "auto_activate" : {
                   "type" : "boolean",
                   "description" : "Whether to automatically activate the keystore on startup",
-                  "default" : "true"
+                  "default" : true
                 },
                 "password" : {
                   "type" : "string",
@@ -744,12 +744,12 @@
           "critical" : {
             "type" : "boolean",
             "description" : "Whether the extension is marked as critical",
-            "default" : "false"
+            "default" : false
           },
           "enabled" : {
             "type" : "boolean",
             "description" : "Whether the extension is enabled",
-            "default" : "true"
+            "default" : true
           },
           "excluded_subtrees" : {
             "description" : "List of excluded subtrees for name constraints",
@@ -777,12 +777,12 @@
         "critical" : {
           "type" : "boolean",
           "description" : "Whether the extension is marked as critical",
-          "default" : "false"
+          "default" : false
         },
         "enabled" : {
           "type" : "boolean",
           "description" : "Whether the extension is enabled",
-          "default" : "true"
+          "default" : true
         },
         "inhibit_policy_mapping" : {
           "type" : "integer",
@@ -803,12 +803,12 @@
         "critical" : {
           "type" : "boolean",
           "description" : "Whether the extension is marked as critical",
-          "default" : "false"
+          "default" : false
         },
         "enabled" : {
           "type" : "boolean",
           "description" : "Whether the extension is enabled",
-          "default" : "true"
+          "default" : true
         },
         "mappings" : {
           "description" : "List of policy mappings",
@@ -843,7 +843,7 @@
         "length" : {
           "type" : "integer",
           "description" : "Length of the serial number in bytes (1-20)",
-          "default" : "16",
+          "default" : 16,
           "minimum" : 1,
           "maximum" : 20
         }
@@ -1013,7 +1013,7 @@
           "critical" : {
             "type" : "boolean",
             "description" : "Whether the extension is marked as critical",
-            "default" : "false"
+            "default" : false
           },
           "directory_name" : {
             "$ref" : "#/$defs/SubjectFieldValidation",
@@ -1034,7 +1034,7 @@
           "enabled" : {
             "type" : "boolean",
             "description" : "Whether the extension is enabled",
-            "default" : "true"
+            "default" : true
           },
           "fasc_n" : {
             "$ref" : "#/$defs/SubjectFieldValidation",
@@ -1107,7 +1107,7 @@
           "critical" : {
             "type" : "boolean",
             "description" : "Whether the extension is marked as critical",
-            "default" : "false"
+            "default" : false
           },
           "date_of_birth" : {
             "$ref" : "#/$defs/SubjectFieldValidation",
@@ -1117,7 +1117,7 @@
           "enabled" : {
             "type" : "boolean",
             "description" : "Whether the extension is enabled",
-            "default" : "true"
+            "default" : true
           },
           "gender" : {
             "$ref" : "#/$defs/SubjectFieldValidation",
@@ -1152,12 +1152,12 @@
         "critical" : {
           "type" : "boolean",
           "description" : "Whether the extension is marked as critical",
-          "default" : "false"
+          "default" : false
         },
         "enabled" : {
           "type" : "boolean",
           "description" : "Whether the extension is enabled",
-          "default" : "true"
+          "default" : true
         }
       },
       "description" : "Subject information access extension configuration"
@@ -1170,7 +1170,7 @@
       "type" : "boolean",
       "title" : "Template Flag",
       "description" : "Indicates whether this configuration serves as a reusable template. Template configurations are designed to be extended by other configurations.",
-      "default" : "false"
+      "default" : false
     },
     "validity" : {
       "type" : "object",
@@ -1178,7 +1178,7 @@
         "allow_override" : {
           "type" : "boolean",
           "description" : "Whether the validity period can be overridden during certificate issuance",
-          "default" : "false"
+          "default" : false
         },
         "duration" : {
           "type" : "string",
