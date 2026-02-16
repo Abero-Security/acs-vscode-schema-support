@@ -108,7 +108,7 @@ This creates a `.vsix` file you can install locally.
 │   ├── ca-profile.schema.json
 │   └── keystore.schema.json
 ├── images/
-│   └── logo-v3-white-text.png
+│   └── logo-v3-black-text-white-bg.png
 └── package.json
 ```
 

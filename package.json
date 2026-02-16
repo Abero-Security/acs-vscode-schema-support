@@ -17,7 +17,7 @@
   "engines": {
     "vscode": "^1.102.0"
   },
-  "icon": "images/logo-v3-white-text.png",
+  "icon": "images/logo-v3-black-text-white-bg.png",
   "categories": [
     "Linters",
     "Programming Languages"
