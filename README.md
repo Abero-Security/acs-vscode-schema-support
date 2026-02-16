@@ -1,36 +1,7 @@
-# ACS VS Code Schema Support
+# ACS Schema Support
 
 This VS Code extension provides YAML schema support for Agile Certificate Services (ACS) configuration files.
 It enables IntelliSense, validation, and autocompletion for the supported configuration files.
-
-## Supported Configuration Files
-
-*Note:* All configuration files must end with exact lower case match and end with .yml.
-The structure of a configuration file is `<name>.<type>.yml` and the name must be the same
-string value as in the 'name' field in the YAML file.
-
-Name can have the characters 'a-z', 'A-Z', '0-9' and the '-','_' characters.
-
-### Configuration Types
-
-* **Certificate Profile**: `<name>.certprofile.yml`
-    - Complete X.509 certificate profile specification
-    - Includes subject fields, extensions, validity periods, and cryptographic parameters
-    - Example: `my_cert_profile.certprofile.yml`
-
-* **CA Profile**: `<name>.caprofile.yml`
-    - Certificate Authority profile configuration
-    - Example: `my_ca_profile.caprofile.yml`
-
-* **Keystore**: `<name>.keystore.yml`
-    - Keystore configuration settings
-    - Example: `my_keystore.keystore.yml`
-
-## Prerequisites
-
-This extension requires
-the [YAML extension by Red Hat](https://marketplace.visualstudio.com/items?itemName=redhat.vscode-yaml).
-It will be installed automatically when you install this extension.
 
 ## Features
 
@@ -42,18 +13,46 @@ It will be installed automatically when you install this extension.
 - **Error Highlighting**: Real-time validation with error messages for invalid configurations
 - **Documentation**: Hover tooltips with property descriptions and valid values
 
+## Supported Configuration Files
+
+All configuration files must:
+
+- Use the naming pattern: `<name>.<type>.yml`
+- End with `.yml` (lowercase)
+- Have a `name` field matching the filename prefix
+- Use only these characters in names: `a-z`, `A-Z`, `0-9`, `-`, `_`
+
+### Configuration Types
+
+| Type                    | Filename Pattern         | Description                                                                 |
+|-------------------------|--------------------------|-----------------------------------------------------------------------------|
+| **Certificate Profile** | `<name>.certprofile.yml` | X.509 certificate profile with subject fields, extensions, validity periods |
+| **CA Profile**          | `<name>.caprofile.yml`   | Certificate Authority profile configuration                                 |
+| **Keystore**            | `<name>.keystore.yml`    | Keystore configuration settings                                             |
+
+**Examples:**
+
+- `my-cert.certprofile.yml`
+- `root_ca.caprofile.yml`
+- `production_keystore.keystore.yml`
+
+## Prerequisites
+
+This extension requires
+the [YAML extension by Red Hat](https://marketplace.visualstudio.com/items?itemName=redhat.vscode-yaml), which will be
+installed automatically as a dependency.
+
 ## Usage
 
-Once installed, the extension automatically provides schema support for all supported configuration file types:
+Once installed, schema support is automatically activated for files matching the supported patterns. Just create or open
+a `.certprofile.yml`, `.caprofile.yml`, or `.keystore.yml` file and start editing!
 
-### Certificate Profile (*.certprofile.yml)
-
-Comprehensive validation including:
+### Certificate Profile Features
 
 - Certificate subject fields and constraints
-- X.509 certificate extensions (Basic Constraints, Key Usage, etc.)
-- Subject Alternative Names with various field types
-- Certificate policies and advanced extensions
+- X.509 extensions (Basic Constraints, Key Usage, Extended Key Usage, etc.)
+- Subject Alternative Names (DNS, IP, Email, URI, etc.)
+- Certificate policies and custom extensions
 - Cryptographic parameters and validity periods
 
 ### CA Profile (*.caprofile.yml)
@@ -64,43 +63,59 @@ Certificate Authority configuration validation
 
 Keystore configuration validation
 
-## Installing from VSIX
+## Installation
 
-If you have a `.vsix` file (e.g. from a GitHub release), you can install it manually:
-
-### Method 1: Using the Command Line
-
-```bash
-code --install-extension acs-vscode-schema-support-<version>.vsix
-```
-
-### Method 2: Using VS Code UI
+### From VS Code Marketplace
 
 1. Open VS Code
-2. Go to the Extensions view (Ctrl+Shift+X / Cmd+Shift+X)
-3. Click the three dots menu (`...`) in the Extensions view
-4. Select "Install from VSIX..."
-5. Browse and select the `.vsix` file
+2. Go to Extensions view (`Ctrl+Shift+X` / `Cmd+Shift+X`)
+3. Search for "ACS Schema Support"
+4. Click Install
 
-## Development
+### From VSIX File
 
-### Building the Extension
-
-Install the VS Code Extension Manager and package the extension:
+**Command Line:**
 
 ```bash
+code --install-extension acs-schema-support-<version>.vsix
+```
+
+**VS Code UI:**
+
+1. Open Extensions view (`Ctrl+Shift+X` / `Cmd+Shift+X`)
+2. Click the `...` menu → "Install from VSIX..."
+3. Select the `.vsix` file
+
+## Contributing
+
+### Building from Source
+
+```bash
+# Install the VS Code Extension Manager
 npm install -g @vscode/vsce
-npm install
+
+# Package the extension
 vsce package
 ```
 
+This creates a `.vsix` file you can install locally.
+
 ### Project Structure
 
-- `schemas/certificate-profile.schema.json` - JSON schema for certificate profiles
-- `schemas/ca-profile.schema.json` - JSON schema for CA profiles
-- `schemas/keystore.schema.json` - JSON schema for keystore configurations
-- `package.json` - Extension manifest and configuration
+```
+├── schemas/
+│   ├── certificate-profile.schema.json
+│   ├── ca-profile.schema.json
+│   └── keystore.schema.json
+├── images/
+│   └── logo-v3-black-text-white-bg.png
+└── package.json
+```
 
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+---
+
+**Copyright (c) 2026 Abero Security AB**
