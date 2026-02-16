@@ -3,7 +3,7 @@
   "displayName": "ACS YAML Schema Support",
   "description": "Adds YAML Schema Support to VSCode for Agile Certificate Services configuration files.",
   "version": "0.0.0",
-  "publisher": "Abero-Security",
+  "publisher": "AberoSecurityAB",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -17,7 +17,7 @@
   "engines": {
     "vscode": "^1.102.0"
   },
-  "icon": "images/icon.png",
+  "icon": "images/logo-v3-white-text.png",
   "categories": [
     "Linters",
     "Programming Languages"
